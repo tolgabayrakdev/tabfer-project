@@ -81,7 +81,7 @@ export default function DashboardLayout() {
     setIsLogoutLoading(true)
     setTimeout(() => {
       // Burada çıkış işlemlerini gerçekleştirin
-      navigate('/login') // Kullanıcıyı login sayfasına yönlendir
+      navigate('/signin') // Kullanıcıyı login sayfasına yönlendir
       setIsLogoutLoading(false)
     }, 1000) // 1.5 saniye bekletme
   }, [navigate])
@@ -152,7 +152,7 @@ export default function DashboardLayout() {
 
         {/* Footer */}
         <Box as="footer" bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} p={4} textAlign="center" borderTopWidth="1px" borderTopColor="gray.200">
-          <Text>&copy; 2023 Dashboard Örneği</Text>
+          <Text>&copy; 2024 @Dashboard App</Text>
         </Box>
       </Flex>
 
