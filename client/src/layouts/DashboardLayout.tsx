@@ -15,7 +15,8 @@ import {
   Text,
   Button,
   useColorMode,
-  Spacer
+  Spacer,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { HamburgerIcon, ViewIcon, SettingsIcon, InfoIcon, SunIcon, MoonIcon } from '@chakra-ui/icons'
 import LoadingSpinner from '../components/Loading'
@@ -86,12 +87,19 @@ export default function DashboardLayout() {
     }, 1000) // 1.5 saniye bekletme
   }, [navigate])
 
+  // Renk değerlerini useColorModeValue ile ayarlayalım
+  const sidebarBg = useColorModeValue('gray.50', 'gray.900')
+  const borderColor = useColorModeValue('gray.200', 'gray.700')
+  const headerBg = useColorModeValue('white', 'gray.800')
+  const footerBg = useColorModeValue('gray.100', 'gray.700')
+  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') // Yeni eklenen satır
+
   return (
     <Flex minH="100vh">
       {/* Desktop için sabit Sidebar */}
       <Box
         width="250px"
-        bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}
+        bg={sidebarBg}
         height="100vh"
         position="fixed"
         left={0}
@@ -99,7 +107,7 @@ export default function DashboardLayout() {
         display={{ base: 'none', md: 'flex' }}
         flexDirection="column"
         borderRightWidth="1px"
-        borderRightColor="gray.200"
+        borderRightColor={borderColor}
       >
         <Box p={4} display="flex" justifyContent="center" alignItems="center">
           <Text fontSize="2xl" fontWeight="bold">Dashboard</Text>
@@ -112,10 +120,10 @@ export default function DashboardLayout() {
       {/* Ana içerik alanı */}
       <Flex flexDirection="column" flex={1} ml={{ base: 0, md: '250px' }}>
         <Flex
-          bg={colorMode === 'light' ? 'white' : 'gray.800'}
+          bg={headerBg}
           p={4}
           borderBottomWidth="1px"
-          borderBottomColor="gray.200"
+          borderBottomColor={borderColor}
           alignItems="center"
         >
           <IconButton
@@ -143,7 +151,18 @@ export default function DashboardLayout() {
 
         <Box flex={1} p={4} overflowY="auto" position="relative">
           {isPageLoading && (
-            <Box position="absolute" top={0} left={0} right={0} bottom={0} bg="rgba(255,255,255,0.7)" zIndex={1000}>
+            <Box 
+              position="absolute" 
+              top={0} 
+              left={0} 
+              right={0} 
+              bottom={0} 
+              bg={loadingBg} // Değiştirilen kısım
+              zIndex={1000}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
               <LoadingSpinner />
             </Box>
           )}
@@ -151,7 +170,7 @@ export default function DashboardLayout() {
         </Box>
 
         {/* Footer */}
-        <Box as="footer" bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} p={4} textAlign="center" borderTopWidth="1px" borderTopColor="gray.200">
+        <Box as="footer" bg={footerBg} p={4} textAlign="center" borderTopWidth="1px" borderTopColor={borderColor}>
           <Text>&copy; 2024 @Dashboard App</Text>
         </Box>
       </Flex>
@@ -159,9 +178,9 @@ export default function DashboardLayout() {
       {/* Mobil için Drawer */}
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg={sidebarBg}>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Dashboard Menü</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px" borderBottomColor={borderColor}>Dashboard Menü</DrawerHeader>
           <DrawerBody>
             <Sidebar onNavigate={handleNavigation} />
           </DrawerBody>
