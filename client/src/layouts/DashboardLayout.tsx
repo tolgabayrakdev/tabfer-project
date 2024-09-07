@@ -1,4 +1,5 @@
-import { Outlet, useLocation, Link, useNavigate } from 'react-router-dom'
+import { useState, useCallback, useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {
   Box,
   Flex,
@@ -17,40 +18,40 @@ import {
   Spacer
 } from '@chakra-ui/react'
 import { HamburgerIcon, ViewIcon, SettingsIcon, InfoIcon, SunIcon, MoonIcon } from '@chakra-ui/icons'
+import LoadingSpinner from '../components/Loading'
 
 // NavItem bileşeni
-const NavItem = ({ icon, children, to }: { icon: React.ReactNode, children: React.ReactNode, to: string }) => {
+const NavItem = ({ icon, children, to, onClick }: { icon: React.ReactNode, children: React.ReactNode, to: string, onClick: (to: string) => void }) => {
   const location = useLocation()
   const active = location.pathname === to
 
   return (
-    <Link to={to}>
-      <Button
-        leftIcon={icon ? <>{icon}</> : undefined}
-        variant={active ? "solid" : "ghost"}
-        colorScheme={active ? "blue" : "gray"}
-        justifyContent="flex-start"
-        width="100%"
-        borderRadius="md"
-        mb={2}
-      >
-        {children}
-      </Button>
-    </Link>
+    <Button
+      leftIcon={icon ? <>{icon}</> : undefined}
+      variant={active ? "solid" : "ghost"}
+      colorScheme={active ? "blue" : "gray"}
+      justifyContent="flex-start"
+      width="100%"
+      borderRadius="md"
+      mb={2}
+      onClick={() => onClick(to)}
+    >
+      {children}
+    </Button>
   )
 }
 
 // Sidebar bileşeni
-const Sidebar = () => {
+const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
   return (
     <VStack align="stretch" spacing={4} p={4}>
-      <NavItem icon={<ViewIcon />} to="/dashboard">
+      <NavItem icon={<ViewIcon />} to="/dashboard" onClick={onNavigate}>
         Dashboard
       </NavItem>
-      <NavItem icon={<SettingsIcon />} to="/dashboard/settings">
+      <NavItem icon={<SettingsIcon />} to="/dashboard/settings" onClick={onNavigate}>
         Ayarlar
       </NavItem>
-      <NavItem icon={<InfoIcon />} to="/dashboard/about">
+      <NavItem icon={<InfoIcon />} to="/dashboard/about" onClick={onNavigate}>
         Hakkında
       </NavItem>
     </VStack>
@@ -61,12 +62,29 @@ export default function DashboardLayout() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [isLogoutLoading, setIsLogoutLoading] = useState(false)
+  const [isPageLoading, setIsPageLoading] = useState(false)
 
-  const handleLogout = () => {
-    // Burada çıkış işlemlerini gerçekleştirin
-    // Örneğin: localStorage'dan token'ı silme, global state'i temizleme vb.
-    navigate('/login') // Kullanıcıyı login sayfasına yönlendir
-  }
+  const handleNavigation = useCallback((to: string) => {
+    setIsPageLoading(true)
+    setTimeout(() => {
+      navigate(to)
+    }, 1000) // 1.5 saniye bekletme
+  }, [navigate])
+
+  useEffect(() => {
+    setIsPageLoading(false)
+  }, [location])
+
+  const handleLogout = useCallback(() => {
+    setIsLogoutLoading(true)
+    setTimeout(() => {
+      // Burada çıkış işlemlerini gerçekleştirin
+      navigate('/login') // Kullanıcıyı login sayfasına yönlendir
+      setIsLogoutLoading(false)
+    }, 1000) // 1.5 saniye bekletme
+  }, [navigate])
 
   return (
     <Flex minH="100vh">
@@ -87,16 +105,16 @@ export default function DashboardLayout() {
           <Text fontSize="2xl" fontWeight="bold">Dashboard</Text>
         </Box>
         <Box flex={1} overflowY="auto">
-          <Sidebar />
+          <Sidebar onNavigate={handleNavigation} />
         </Box>
       </Box>
 
       {/* Ana içerik alanı */}
       <Flex flexDirection="column" flex={1} ml={{ base: 0, md: '250px' }}>
-        <Flex 
-          bg={colorMode === 'light' ? 'white' : 'gray.800'} 
-          p={4} 
-          borderBottomWidth="1px" 
+        <Flex
+          bg={colorMode === 'light' ? 'white' : 'gray.800'}
+          p={4}
+          borderBottomWidth="1px"
           borderBottomColor="gray.200"
           alignItems="center"
         >
@@ -113,12 +131,22 @@ export default function DashboardLayout() {
             aria-label="Toggle color mode"
             mr={2}
           />
-          <Button colorScheme="red" onClick={handleLogout}>
+          <Button
+            colorScheme="red"
+            onClick={handleLogout}
+            isLoading={isLogoutLoading}
+            loadingText="Çıkış yapılıyor..."
+          >
             Çıkış Yap
           </Button>
         </Flex>
 
-        <Box flex={1} p={4} overflowY="auto">
+        <Box flex={1} p={4} overflowY="auto" position="relative">
+          {isPageLoading && (
+            <Box position="absolute" top={0} left={0} right={0} bottom={0} bg="rgba(255,255,255,0.7)" zIndex={1000}>
+              <LoadingSpinner />
+            </Box>
+          )}
           <Outlet />
         </Box>
 
@@ -135,7 +163,7 @@ export default function DashboardLayout() {
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">Dashboard Menü</DrawerHeader>
           <DrawerBody>
-            <Sidebar />
+            <Sidebar onNavigate={handleNavigation} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
