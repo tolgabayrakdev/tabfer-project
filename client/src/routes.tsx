@@ -8,7 +8,7 @@ const NotFoundPage = lazy(() => import('./pages/error/NotFound'));
 
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
-
+const DashboardSettingsPage = lazy(() => import('./pages/dashboard/Settings'));
 
 
 const routes = createBrowserRouter([
@@ -24,7 +24,8 @@ const routes = createBrowserRouter([
         path: "/dashboard",
         element: <DashboardLayout />,
         children: [
-            { path: "", element: <DashboardIndexPage />, index: true }
+            { path: "", element: <DashboardIndexPage />, index: true },
+            { path: "settings", element: <DashboardSettingsPage /> }
         ]
     }
 ]);
