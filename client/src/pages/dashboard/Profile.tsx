@@ -27,7 +27,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [user, setUser] = useState({
-    name: 'John Doe',
+    username: 'johndoe', // 'name' yerine 'username' kullanıyoruz
     email: 'john@example.com',
     currentPassword: '',
     newPassword: '',
@@ -129,10 +129,10 @@ const Profile = () => {
           <TabPanel>
             <VStack spacing={4} align="stretch">
               <FormControl>
-                <FormLabel>Ad Soyad</FormLabel>
+                <FormLabel>Kullanıcı Adı</FormLabel>
                 <Input
-                  value={user.name}
-                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                  value={user.username}
+                  onChange={(e) => setUser({ ...user, username: e.target.value })}
                   isReadOnly={!isEditing}
                 />
               </FormControl>

@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link as ChakraLink, useToast } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -9,7 +9,42 @@ const SignInSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
+  const toast = useToast();
   const navigate = useNavigate();
+
+  const handleLogin = async (values: { email: string; password: string }) => {
+    try {
+      const res = await fetch("http://localhost:8000/api/v1/authentication/login", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+      if (res.status === 200) {
+        toast({
+          title: 'Giriş başarılı.',
+          description: "Yönlendiriliyorsunuz...",
+          status: 'success',
+          duration: 1000,
+          isClosable: true,
+        })
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1000)
+      } else {
+        toast({
+          title: 'Giriş başarısız.',
+          description: "Bilgilerinizi kontrol ediniz!",
+          status: 'warning',
+          duration: 1000,
+          isClosable: true,
+        })
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
   return (
     <Box maxWidth="400px" margin="auto" mt={8}>
@@ -20,11 +55,8 @@ const SignIn = () => {
           validationSchema={SignInSchema}
           onSubmit={(values, actions) => {
             // Burada giriş işlemlerini gerçekleştirin
-            console.log(values);
-            setTimeout(() => {
-              actions.setSubmitting(false);
-              navigate('/dashboard');
-            }, 1000);
+            handleLogin(values);
+            actions.setSubmitting(false);
           }}
         >
           {(props) => (
@@ -40,7 +72,7 @@ const SignIn = () => {
                   )}
                 </Field>
                 <Field name="password">
-                  {({ field, form }:any) => (
+                  {({ field, form }: any) => (
                     <FormControl isInvalid={form.errors.password && form.touched.password}>
                       <FormLabel htmlFor="password">Şifre</FormLabel>
                       <Input {...field} id="password" type="password" placeholder="Şifre" />

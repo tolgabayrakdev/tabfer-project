@@ -74,7 +74,7 @@ export default function DashboardLayout() {
     setIsPageLoading(true)
     setTimeout(() => {
       navigate(to)
-    }, 1000) // 1.5 saniye bekletme
+    }, 1000)
   }, [navigate])
 
   useEffect(() => {
@@ -83,11 +83,20 @@ export default function DashboardLayout() {
 
   const handleLogout = useCallback(() => {
     setIsLogoutLoading(true)
-    setTimeout(() => {
-      // Burada çıkış işlemlerini gerçekleştirin
-      navigate('/signin') // Kullanıcıyı login sayfasına yönlendir
-      setIsLogoutLoading(false)
-    }, 1000) // 1.5 saniye bekletme
+    setTimeout(async () => {
+      try {
+        const res = await fetch("http://localhost:8000/api/v1/authentication/logout", {
+          method: "POST",
+          credentials: "include"
+        });
+        if (res.status === 200) {
+          navigate('/signin') // Kullanıcıyı login sayfasına yönlendir
+          setIsLogoutLoading(false)
+        }
+      } catch (error) {
+        throw error;
+      }
+    }, 1000)
   }, [navigate])
 
   // Renk değerlerini useColorModeValue ile ayarlayalım
@@ -154,12 +163,12 @@ export default function DashboardLayout() {
 
         <Box flex={1} p={4} overflowY="auto" position="relative">
           {isPageLoading && (
-            <Box 
-              position="absolute" 
-              top={0} 
-              left={0} 
-              right={0} 
-              bottom={0} 
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              bottom={0}
               bg={loadingBg} // Değiştirilen kısım
               zIndex={1000}
               display="flex"

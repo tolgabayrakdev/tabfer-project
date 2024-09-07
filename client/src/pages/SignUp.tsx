@@ -1,10 +1,10 @@
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link as ChakraLink, useToast } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 const SignUpSchema = Yup.object().shape({
-  name: Yup.string().required('İsim gerekli'),
+  username: Yup.string().required('Kullanıcı adı gerekli'),
   email: Yup.string().email('Geçersiz email').required('Email gerekli'),
   password: Yup.string().min(6, 'Şifre en az 6 karakter olmalı').required('Şifre gerekli'),
   confirmPassword: Yup.string()
@@ -13,33 +13,65 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
+  const toast = useToast();
   const navigate = useNavigate();
+
+  const handleRegister = async (values: { username: string, email: string, password: string }) => {
+    try {
+      const res = await fetch("http://localhost:8000/api/v1/authentication/register", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+      if (res.status === 201) {
+        toast({
+          title: 'Hesap oluşturma başarılı',
+          description: "Yönlendiriliyorsunuz...",
+          status: 'success',
+          duration: 1000,
+          isClosable: true,
+        })
+        setTimeout(() => {
+          navigate('/signin');
+        }, 1000)
+      } else {
+        toast({
+          title: 'Giriş başarısız.',
+          description: "Bilgilerinizi kontrol ediniz!",
+          status: 'warning',
+          duration: 1000,
+          isClosable: true,
+        })
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
   return (
     <Box maxWidth="400px" margin="auto" mt={8}>
       <VStack spacing={8} align="stretch">
         <Heading textAlign="center">Kayıt Ol</Heading>
         <Formik
-          initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
+          initialValues={{ username: '', email: '', password: '', confirmPassword: '' }}
           validationSchema={SignUpSchema}
           onSubmit={(values, actions) => {
             // Burada kayıt işlemlerini gerçekleştirin
-            console.log(values);
-            setTimeout(() => {
-              actions.setSubmitting(false);
-              navigate('/signin');
-            }, 1000);
+            handleRegister(values)
+            actions.setSubmitting(false);
           }}
         >
           {(props) => (
             <Form>
               <VStack spacing={4}>
-                <Field name="name">
+                <Field name="username">
                   {({ field, form }: any) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor="name">İsim</FormLabel>
-                      <Input {...field} id="name" placeholder="İsim" />
-                      <Text color="red.500">{form.errors.name}</Text>
+                    <FormControl isInvalid={form.errors.username && form.touched.username}>
+                      <FormLabel htmlFor="username">Kullanıcı Adı</FormLabel>
+                      <Input {...field} id="username" placeholder="Kullanıcı adı" />
+                      <Text color="red.500">{form.errors.username}</Text>
                     </FormControl>
                   )}
                 </Field>
