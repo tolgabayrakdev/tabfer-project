@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Outlet, useLocation, Link, useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -70,66 +69,76 @@ export default function DashboardLayout() {
   }
 
   return (
-    <Flex minH="100vh" flexDirection="column">
-      <Flex bg={colorMode === 'light' ? 'white' : 'gray.800'} p={4} borderBottomWidth="1px" borderBottomColor="gray.200">
-        <IconButton
-          icon={<HamburgerIcon />}
-          onClick={onOpen}
-          display={{ base: 'block', md: 'none' }}
-          aria-label="Open menu"
-        />
-        <Spacer />
-        <IconButton
-          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          onClick={toggleColorMode}
-          aria-label="Toggle color mode"
-          mr={2}
-        />
-        <Button colorScheme="red" onClick={handleLogout}>
-          Çıkış Yap
-        </Button>
-      </Flex>
-
-      <Flex flex={1}>
-        {/* Mobil için Drawer */}
-        <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader borderBottomWidth="1px">Dashboard Menü</DrawerHeader>
-            <DrawerBody>
-              <Sidebar />
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
-
-        {/* Desktop için sabit Sidebar */}
-        <Box
-          width="250px"
-          bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}
-          height="100%"
-          position="fixed"
-          left={0}
-          display={{ base: 'none', md: 'block' }}
-          borderRightWidth="1px"
-          borderRightColor="gray.200"
-        >
-          <Box p={4} borderBottomWidth="1px" borderBottomColor="gray.200">
-            <Text fontSize="xl" fontWeight="bold">Dashboard</Text>
-          </Box>
+    <Flex minH="100vh">
+      {/* Desktop için sabit Sidebar */}
+      <Box
+        width="250px"
+        bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}
+        height="100vh"
+        position="fixed"
+        left={0}
+        top={0}
+        display={{ base: 'none', md: 'flex' }}
+        flexDirection="column"
+        borderRightWidth="1px"
+        borderRightColor="gray.200"
+      >
+        <Box p={4} display="flex" justifyContent="center" alignItems="center">
+          <Text fontSize="2xl" fontWeight="bold">Dashboard</Text>
+        </Box>
+        <Box flex={1} overflowY="auto">
           <Sidebar />
         </Box>
+      </Box>
 
-        {/* Ana içerik alanı */}
-        <Box flex={1} ml={{ base: 0, md: '250px' }} p={4}>
+      {/* Ana içerik alanı */}
+      <Flex flexDirection="column" flex={1} ml={{ base: 0, md: '250px' }}>
+        <Flex 
+          bg={colorMode === 'light' ? 'white' : 'gray.800'} 
+          p={4} 
+          borderBottomWidth="1px" 
+          borderBottomColor="gray.200"
+          alignItems="center"
+        >
+          <IconButton
+            icon={<HamburgerIcon />}
+            onClick={onOpen}
+            display={{ base: 'flex', md: 'none' }}
+            aria-label="Open menu"
+          />
+          <Spacer />
+          <IconButton
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            onClick={toggleColorMode}
+            aria-label="Toggle color mode"
+            mr={2}
+          />
+          <Button colorScheme="red" onClick={handleLogout}>
+            Çıkış Yap
+          </Button>
+        </Flex>
+
+        <Box flex={1} p={4} overflowY="auto">
           <Outlet />
+        </Box>
+
+        {/* Footer */}
+        <Box as="footer" bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} p={4} textAlign="center" borderTopWidth="1px" borderTopColor="gray.200">
+          <Text>&copy; 2023 Dashboard Örneği</Text>
         </Box>
       </Flex>
 
-      {/* Footer */}
-      <Box as="footer" bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} p={4} textAlign="center" borderTopWidth="1px" borderTopColor="gray.200">
-        <Text>&copy; 2023 Dashboard Örneği</Text>
-      </Box>
+      {/* Mobil için Drawer */}
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px">Dashboard Menü</DrawerHeader>
+          <DrawerBody>
+            <Sidebar />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Flex>
   )
 }
