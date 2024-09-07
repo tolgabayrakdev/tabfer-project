@@ -20,6 +20,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 
 const Profile = () => {
@@ -34,6 +35,11 @@ const Profile = () => {
   });
   const toast = useToast();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
+  const [errors, setErrors] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+  });
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -62,24 +68,52 @@ const Profile = () => {
     // Kullanıcıyı ana sayfaya yönlendir
   };
 
-  const handleChangePassword = () => {
-    // Burada şifre değiştirme API çağrısı yapılabilir
+  const validatePasswordChange = () => {
+    let isValid = true;
+    const newErrors = {
+      currentPassword: '',
+      newPassword: '',
+      confirmNewPassword: '',
+    };
+
+    if (!user.currentPassword) {
+      newErrors.currentPassword = 'Mevcut şifre gereklidir';
+      isValid = false;
+    }
+
+    if (!user.newPassword) {
+      newErrors.newPassword = 'Yeni şifre gereklidir';
+      isValid = false;
+    } else if (user.newPassword.length < 6) {
+      newErrors.newPassword = 'Yeni şifre en az 6 karakterli olmalıdır';
+      isValid = false;
+    }
+
+    if (!user.confirmNewPassword) {
+      newErrors.confirmNewPassword = 'Şifre onayı gereklidir';
+      isValid = false;
+    }
+
     if (user.newPassword !== user.confirmNewPassword) {
+      newErrors.confirmNewPassword = 'Şifreler eşleşmiyor';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleChangePassword = () => {
+    if (validatePasswordChange()) {
+      // Burada şifre değiştirme API çağrısı yapılabilir
       toast({
-        title: 'Şifreler eşleşmiyor.',
-        status: 'error',
+        title: 'Şifre değiştirildi.',
+        status: 'success',
         duration: 3000,
         isClosable: true,
       });
-      return;
+      setUser({ ...user, currentPassword: '', newPassword: '', confirmNewPassword: '' });
     }
-    toast({
-      title: 'Şifre değiştirildi.',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    setUser({ ...user, currentPassword: '', newPassword: '', confirmNewPassword: '' });
   };
 
   return (
@@ -124,29 +158,32 @@ const Profile = () => {
           </TabPanel>
           <TabPanel>
             <VStack spacing={4} align="stretch">
-              <FormControl>
+              <FormControl isInvalid={!!errors.currentPassword}>
                 <FormLabel>Mevcut Şifre</FormLabel>
                 <Input
                   type="password"
                   value={user.currentPassword}
                   onChange={(e) => setUser({ ...user, currentPassword: e.target.value })}
                 />
+                <FormErrorMessage>{errors.currentPassword}</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={!!errors.newPassword}>
                 <FormLabel>Yeni Şifre</FormLabel>
                 <Input
                   type="password"
                   value={user.newPassword}
                   onChange={(e) => setUser({ ...user, newPassword: e.target.value })}
                 />
+                <FormErrorMessage>{errors.newPassword}</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={!!errors.confirmNewPassword}>
                 <FormLabel>Yeni Şifre (Tekrar)</FormLabel>
                 <Input
                   type="password"
                   value={user.confirmNewPassword}
                   onChange={(e) => setUser({ ...user, confirmNewPassword: e.target.value })}
                 />
+                <FormErrorMessage>{errors.confirmNewPassword}</FormErrorMessage>
               </FormControl>
               <Button 
                 size="sm" 
