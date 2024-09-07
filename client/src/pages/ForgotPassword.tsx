@@ -1,29 +1,26 @@
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-const SignInSchema = Yup.object().shape({
+const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Geçersiz email').required('Email gerekli'),
-  password: Yup.string().required('Şifre gerekli'),
 });
 
-const SignIn = () => {
-  const navigate = useNavigate();
-
+const ForgotPassword = () => {
   return (
     <Box maxWidth="400px" margin="auto" mt={8}>
       <VStack spacing={8} align="stretch">
-        <Heading textAlign="center">Giriş Yap</Heading>
+        <Heading textAlign="center">Şifremi Unuttum</Heading>
         <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={SignInSchema}
+          initialValues={{ email: '' }}
+          validationSchema={ForgotPasswordSchema}
           onSubmit={(values, actions) => {
-            // Burada giriş işlemlerini gerçekleştirin
+            // Burada şifre sıfırlama işlemlerini gerçekleştirin
             console.log(values);
             setTimeout(() => {
               actions.setSubmitting(false);
-              navigate('/dashboard');
+              alert('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.');
             }, 1000);
           }}
         >
@@ -39,15 +36,6 @@ const SignIn = () => {
                     </FormControl>
                   )}
                 </Field>
-                <Field name="password">
-                  {({ field, form }:any) => (
-                    <FormControl isInvalid={form.errors.password && form.touched.password}>
-                      <FormLabel htmlFor="password">Şifre</FormLabel>
-                      <Input {...field} id="password" type="password" placeholder="Şifre" />
-                      <Text color="red.500">{form.errors.password}</Text>
-                    </FormControl>
-                  )}
-                </Field>
                 <Button
                   mt={4}
                   colorScheme="blue"
@@ -55,19 +43,15 @@ const SignIn = () => {
                   type="submit"
                   width="full"
                 >
-                  Giriş Yap
+                  Şifre Sıfırlama Bağlantısı Gönder
                 </Button>
-                <ChakraLink as={RouterLink} to="/forgot-password" color="blue.500" alignSelf="flex-start">
-                  Şifremi Unuttum
-                </ChakraLink>
               </VStack>
             </Form>
           )}
         </Formik>
         <Text textAlign="center">
-          Hesabınız yok mu?{' '}
-          <ChakraLink as={RouterLink} to="/signup" color="blue.500">
-            Kayıt Ol
+          <ChakraLink as={RouterLink} to="/signin" color="blue.500">
+            Giriş sayfasına dön
           </ChakraLink>
         </Text>
       </VStack>
@@ -75,4 +59,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPassword;
