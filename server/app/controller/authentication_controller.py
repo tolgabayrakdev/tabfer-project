@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 import jwt
 from app.util.helper import Helper
+from app.depend.authenticated_user import authenticated_user
 from typing import Dict
 
 router = APIRouter()
@@ -28,6 +29,11 @@ async def register(user: RegisterUser, db: Session = Depends(get_db)):
     return AuthenticationService.register(payload=user, db=db)
 
 
+@router.get("/private")
+async def private_route(user=Depends(authenticated_user)):
+    return {"message": f"Welcome {user["username"]}, this is a private route."}
+
+
 @router.post("/verify", status_code=200)
 async def verify_user(request: Request, db: Session = Depends(get_db)):
     try:
@@ -36,7 +42,7 @@ async def verify_user(request: Request, db: Session = Depends(get_db)):
 
         if access_token and refresh_token:
             user_id = helper.decode_jwt(token=access_token)
-            result = AuthenticationService.verify_user(user_id["user_id"], db=db)
+            result = AuthenticationService.verify_user(user_id, db=db)
 
             if result:
                 return {
