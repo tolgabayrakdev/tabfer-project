@@ -55,8 +55,8 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
       <NavItem icon={<SettingsIcon />} to="/dashboard/settings" onClick={onNavigate}>
         Ayarlar
       </NavItem>
-      <NavItem icon={<InfoIcon />} to="/dashboard/about" onClick={onNavigate}>
-        Hakkında
+      <NavItem icon={<InfoIcon />} to="/dashboard/intelligence" onClick={onNavigate}>
+        İstihbarat
       </NavItem>
     </VStack>
   )

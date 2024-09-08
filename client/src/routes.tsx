@@ -10,7 +10,7 @@ const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
 const DashboardSettingsPage = lazy(() => import('./pages/dashboard/Settings'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
-
+const DashboardIntelligencePage = lazy(() => import('./pages/dashboard/Intelligence'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -38,7 +38,8 @@ const routes = createBrowserRouter([
         children: [
             { path: "", element: <DashboardIndexPage />, index: true },
             { path: "settings", element: <DashboardSettingsPage /> },
-            { path: "profile", element: <DashboardProfilePage /> }
+            { path: "profile", element: <DashboardProfilePage /> },
+            { path: "intelligence", element: <DashboardIntelligencePage /> }
         ]
     }
 ]);
