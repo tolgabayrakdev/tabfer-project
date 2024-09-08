@@ -3,10 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from .controller import authentication_controller
 from .database import engine
 from . import model
+from app.middleware.logging_middleware import logging_middleware
 
 model.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Loglama middleware'ini ekleyin
+app.middleware("http")(logging_middleware)
 
 origins = ["http://localhost:5173", "https://localhost:5173"]
 

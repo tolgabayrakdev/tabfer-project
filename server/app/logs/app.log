@@ -1,0 +1,14 @@
+2024-09-08 11:28:14,030 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0149s
+2024-09-08 11:28:18,652 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0061s
+2024-09-08 11:29:54,161 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:29:55,079 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:29:56,999 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0094s with status code 200
+2024-09-08 11:29:57,482 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0050s with status code 200
+2024-09-08 11:29:57,619 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0035s with status code 200
+2024-09-08 11:30:27,586 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:30:28,128 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:30:28,491 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:30:29,986 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:30:30,658 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:30:36,292 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:30:36,897 - watchfiles.main - INFO - 3 changes detected
