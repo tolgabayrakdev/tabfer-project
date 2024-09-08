@@ -12,3 +12,41 @@
 2024-09-08 11:30:30,658 - watchfiles.main - INFO - 3 changes detected
 2024-09-08 11:30:36,292 - watchfiles.main - INFO - 1 change detected
 2024-09-08 11:30:36,897 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:30:57,248 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0115s with status code 200
+2024-09-08 11:31:31,816 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:31:32,326 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:31:46,002 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:32:06,455 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:32:10,002 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:34:12,125 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:34:15,553 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:34:19,487 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:34:37,009 - watchfiles.main - INFO - 4 changes detected
+2024-09-08 11:34:37,777 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:34:38,142 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:35:08,899 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:13,522 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:22,461 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:23,562 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:25,599 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:41,028 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:35:51,420 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:22,976 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:30,890 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:35,050 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:50,000 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:55,977 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:36:57,157 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:37:14,354 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:37:15,095 - watchfiles.main - INFO - 9 changes detected
+2024-09-08 11:37:41,014 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:37:41,767 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:37:57,979 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:37:58,675 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:38:03,632 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:38:04,260 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 11:39:53,060 - app.middleware.logging_middleware - INFO - PUT /api/v1/user/profile completed in 0.0591s with status code 200
+2024-09-08 11:40:08,064 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0054s with status code 200
+2024-09-08 11:42:27,370 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:42:27,964 - watchfiles.main - INFO - 1 change detected
+2024-09-08 11:42:28,324 - watchfiles.main - INFO - 3 changes detected
