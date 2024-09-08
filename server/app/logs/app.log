@@ -50,3 +50,77 @@
 2024-09-08 11:42:27,370 - watchfiles.main - INFO - 1 change detected
 2024-09-08 11:42:27,964 - watchfiles.main - INFO - 1 change detected
 2024-09-08 11:42:28,324 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:33:00,153 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logi completed in 0.0009s with status code 404
+2024-09-08 21:33:01,679 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0168s with status code 200
+2024-09-08 21:33:08,878 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verif completed in 0.0004s with status code 404
+2024-09-08 21:33:10,081 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0059s with status code 200
+2024-09-08 21:34:44,953 - app.middleware.logging_middleware - INFO - POST /api/v1/user/change-password completed in 0.0004s with status code 405
+2024-09-08 21:35:23,674 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:35:24,247 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:35:24,602 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:36:09,414 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:36:10,233 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:36:31,329 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:36:32,057 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:36:32,419 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:36:33,129 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:00,712 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:01,394 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:25,792 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:26,428 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:30,609 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:31,339 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:36,985 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:37,658 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:40,610 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:41,251 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:52,917 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:53,560 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:37:57,044 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:37:57,776 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:14,980 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:15,771 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:16,352 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:17,061 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:17,424 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:18,141 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:20,381 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:21,054 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:22,882 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:23,531 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:38:27,290 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:38:27,989 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:40:21,622 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:40:22,467 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:40:22,832 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:40:23,603 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:40:58,781 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:40:59,589 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:41:02,932 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:03,433 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:03,907 - watchfiles.main - INFO - 4 changes detected
+2024-09-08 21:41:04,371 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:04,829 - watchfiles.main - INFO - 4 changes detected
+2024-09-08 21:41:05,299 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:05,756 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:41:17,272 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:17,903 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:41:29,406 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:30,103 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:41:47,186 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:47,973 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:41:48,658 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:41:49,346 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:43:35,419 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:43:36,177 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:43:41,833 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:43:42,548 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:43:43,460 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:43:44,136 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:43:46,579 - app.middleware.logging_middleware - INFO - PUT /api/v1/user/change-password completed in 0.0169s with status code 200
+2024-09-08 21:44:01,874 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:44:02,354 - watchfiles.main - INFO - 1 change detected
+2024-09-08 21:44:02,715 - watchfiles.main - INFO - 3 changes detected
+2024-09-08 21:44:21,820 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0014s with status code 200
+2024-09-08 21:44:31,670 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0115s with status code 400
+2024-09-08 21:44:34,207 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0053s with status code 200

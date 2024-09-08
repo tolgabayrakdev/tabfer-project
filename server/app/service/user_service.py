@@ -5,6 +5,7 @@ from app.util.helper import Helper
 
 helper = Helper()
 
+
 class UserService:
     @staticmethod
     def update_profile(db: Session, user_id: int, user_update: UserUpdate):
@@ -19,8 +20,10 @@ class UserService:
     @staticmethod
     def change_password(db: Session, user_id: int, password_change: PasswordChange):
         user = db.query(User).filter(User.id == user_id).first()
-        if user and helper.match_hash_text(password_change.current_password, user.hashed_password):
-            user.hashed_password = helper.generate_hash_password(password_change.new_password)
+        if user and helper.match_hash_text(
+            str(user.password), password_change.current_password
+        ):
+            user.password = helper.generate_hash_password(password_change.new_password) # type: ignore
             db.commit()
             return True
         return False
