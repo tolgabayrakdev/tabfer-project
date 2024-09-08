@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   VStack,
@@ -22,13 +22,15 @@ import {
   TabPanel,
   FormErrorMessage,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [user, setUser] = useState({
-    username: 'johndoe', // 'name' yerine 'username' kullanıyoruz
-    email: 'john@example.com',
+    username: '',
+    email: '',
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -41,31 +43,107 @@ const Profile = () => {
     confirmNewPassword: '',
   });
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/v1/authentication/verify", {
+          method: "POST",
+          credentials: "include"
+        });
+        if (!response.ok) {
+          throw new Error('Sunucu yanıtı başarısız');
+        }
+        const data = await response.json();
+        const { username, email } = data.user;
+        setUser(prevUser => ({ ...prevUser, username, email }));
+      } catch (error) {
+        console.error('Kullanıcı bilgileri alınamadı:', error);
+        toast({
+          title: 'Kullanıcı bilgileri alınamadı.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    // Burada kullanıcı bilgilerini güncelleme API çağrısı yapılabilir
-    setIsEditing(false);
-    toast({
-      title: 'Profil güncellendi.',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
+  const handleSave = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/user/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: user.username,
+          email: user.email,
+        }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Profil güncellenemedi');
+      }
+
+      const data = await response.json();
+      setUser(prevUser => ({ ...prevUser, ...data.user }));
+      setIsEditing(false);
+      toast({
+        title: 'Profil güncellendi.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error('Profil güncellenirken hata oluştu:', error);
+      toast({
+        title: 'Profil güncellenemedi.',
+        description: 'Lütfen daha sonra tekrar deneyin.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
-  const handleDelete = () => {
-    // Burada hesap silme API çağrısı yapılabilir
-    setIsDeleteDialogOpen(false);
-    toast({
-      title: 'Hesap silindi.',
-      status: 'info',
-      duration: 3000,
-      isClosable: true,
-    });
-    // Kullanıcıyı ana sayfaya yönlendir
+  const handleDelete = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/user/delete-account', {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Hesap silinemedi');
+      }
+
+      setIsDeleteDialogOpen(false);
+      toast({
+        title: 'Hesap silindi.',
+        status: 'info',
+        duration: 3000,
+        isClosable: true,
+      });
+      
+      // Kullanıcıyı giriş ekranına yönlendir
+      navigate('/signin');
+    } catch (error) {
+      console.error('Hesap silinirken hata oluştu:', error);
+      toast({
+        title: 'Hesap silinemedi.',
+        description: 'Lütfen daha sonra tekrar deneyin.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   const validatePasswordChange = () => {
@@ -103,16 +181,43 @@ const Profile = () => {
     return isValid;
   };
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
     if (validatePasswordChange()) {
-      // Burada şifre değiştirme API çağrısı yapılabilir
-      toast({
-        title: 'Şifre değiştirildi.',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
-      setUser({ ...user, currentPassword: '', newPassword: '', confirmNewPassword: '' });
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/user/change-password', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            current_password: user.currentPassword,
+            new_password: user.newPassword,
+          }),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Şifre değiştirilemedi');
+        }
+
+        toast({
+          title: 'Şifre başarıyla değiştirildi.',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+        setUser({ ...user, currentPassword: '', newPassword: '', confirmNewPassword: '' });
+        setErrors({ currentPassword: '', newPassword: '', confirmNewPassword: '' });
+      } catch (error) {
+        console.error('Şifre değiştirilirken hata oluştu:', error);
+        toast({
+          title: 'Şifre değiştirilemedi.',
+          description: 'Lütfen mevcut şifrenizi kontrol edin ve tekrar deneyin.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
 
@@ -185,9 +290,9 @@ const Profile = () => {
                 />
                 <FormErrorMessage>{errors.confirmNewPassword}</FormErrorMessage>
               </FormControl>
-              <Button 
-                size="sm" 
-                colorScheme="green" 
+              <Button
+                size="sm"
+                colorScheme="green"
                 onClick={handleChangePassword}
                 width="150px" // Burada genişliği sınırladık
               >
