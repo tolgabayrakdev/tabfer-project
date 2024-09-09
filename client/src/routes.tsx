@@ -8,9 +8,7 @@ const NotFoundPage = lazy(() => import('./pages/error/NotFound'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
-const DashboardSettingsPage = lazy(() => import('./pages/dashboard/Settings'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
-const DashboardIntelligencePage = lazy(() => import('./pages/dashboard/Intelligence'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -37,9 +35,7 @@ const routes = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             { path: "", element: <DashboardIndexPage />, index: true },
-            { path: "settings", element: <DashboardSettingsPage /> },
             { path: "profile", element: <DashboardProfilePage /> },
-            { path: "intelligence", element: <DashboardIntelligencePage /> }
         ]
     }
 ]);
