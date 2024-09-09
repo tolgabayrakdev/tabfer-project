@@ -9,6 +9,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
+
 const routes = createBrowserRouter([
     {
         path: "/",
