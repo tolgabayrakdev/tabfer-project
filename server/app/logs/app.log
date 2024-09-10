@@ -509,3 +509,85 @@
 2024-09-10 18:45:41,153 - watchfiles.main - INFO - 3 changes detected
 2024-09-10 18:46:04,399 - watchfiles.main - INFO - 1 change detected
 2024-09-10 18:46:09,373 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:59:32,265 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:59:45,557 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0019s with status code 401
+2024-09-10 18:59:45,558 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0020s with status code 401
+2024-09-10 19:00:21,558 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0010s with status code 401
+2024-09-10 19:00:21,558 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0015s with status code 401
+2024-09-10 19:00:42,714 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0007s with status code 404
+2024-09-10 19:00:42,715 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0011s with status code 404
+2024-09-10 19:00:56,831 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0005s with status code 404
+2024-09-10 19:00:56,832 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0013s with status code 404
+2024-09-10 19:01:00,466 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0007s with status code 404
+2024-09-10 19:01:00,467 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0008s with status code 404
+2024-09-10 19:01:17,434 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0006s with status code 404
+2024-09-10 19:01:17,435 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0010s with status code 404
+2024-09-10 19:01:29,804 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0007s with status code 404
+2024-09-10 19:01:29,805 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0010s with status code 404
+2024-09-10 19:01:55,651 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0011s with status code 404
+2024-09-10 19:01:55,652 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0014s with status code 404
+2024-09-10 19:02:49,375 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0295s with status code 500
+2024-09-10 19:03:48,548 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:03:49,032 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:03:49,398 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 19:04:07,370 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:08,194 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 19:04:15,747 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:16,350 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 19:04:17,876 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0152s with status code 500
+2024-09-10 19:04:18,813 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0094s with status code 500
+2024-09-10 19:04:20,120 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:20,720 - watchfiles.main - INFO - 4 changes detected
+2024-09-10 19:04:21,946 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:22,588 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 19:04:24,011 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0101s with status code 500
+2024-09-10 19:04:24,800 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0097s with status code 500
+2024-09-10 19:04:30,052 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:30,593 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:30,951 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 19:04:32,292 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0118s with status code 500
+2024-09-10 19:04:32,846 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0082s with status code 500
+2024-09-10 19:04:32,991 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0062s with status code 500
+2024-09-10 19:04:36,792 - watchfiles.main - INFO - 1 change detected
+2024-09-10 19:04:37,317 - watchfiles.main - INFO - 4 changes detected
+2024-09-10 19:05:37,298 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0353s with status code 201
+2024-09-10 19:10:26,193 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0424s with status code 200
+2024-09-10 19:10:27,217 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0004s with status code 404
+2024-09-10 19:10:27,217 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0006s with status code 404
+2024-09-10 19:10:33,654 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0007s with status code 404
+2024-09-10 19:10:33,654 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0009s with status code 404
+2024-09-10 19:10:51,189 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0022s with status code 404
+2024-09-10 19:10:51,191 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0028s with status code 404
+2024-09-10 19:10:58,033 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0160s with status code 200
+2024-09-10 19:10:59,047 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0005s with status code 404
+2024-09-10 19:10:59,051 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0012s with status code 404
+2024-09-10 19:11:24,333 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0171s with status code 200
+2024-09-10 19:11:25,351 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0023s with status code 404
+2024-09-10 19:11:25,352 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0021s with status code 404
+2024-09-10 19:12:02,162 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0012s with status code 403
+2024-09-10 19:12:50,882 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0162s with status code 200
+2024-09-10 19:12:51,900 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0034s with status code 404
+2024-09-10 19:12:51,903 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0016s with status code 404
+2024-09-10 19:13:40,881 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0169s with status code 200
+2024-09-10 19:13:41,897 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0012s with status code 404
+2024-09-10 19:13:41,898 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0012s with status code 404
+2024-09-10 19:14:33,665 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0170s with status code 400
+2024-09-10 19:14:41,751 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0063s with status code 200
+2024-09-10 19:14:42,768 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0022s with status code 404
+2024-09-10 19:14:42,771 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0030s with status code 404
+2024-09-10 19:15:06,470 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0050s with status code 403
+2024-09-10 19:16:00,953 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0179s with status code 200
+2024-09-10 19:16:01,975 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0029s with status code 404
+2024-09-10 19:16:01,976 - app.middleware.logging_middleware - INFO - POST /api/v1/authetication/verify completed in 0.0014s with status code 404
+2024-09-10 19:16:09,372 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0013s with status code 403
+2024-09-10 19:16:53,619 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0175s with status code 200
+2024-09-10 19:16:54,712 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0450s with status code 200
+2024-09-10 19:16:54,712 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0463s with status code 200
+2024-09-10 19:17:02,037 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0056s with status code 200
+2024-09-10 19:17:02,037 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0054s with status code 200
+2024-09-10 19:17:12,057 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0090s with status code 200
+2024-09-10 19:17:12,058 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0107s with status code 200
+2024-09-10 19:17:12,082 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0066s with status code 200
+2024-09-10 19:17:12,082 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0067s with status code 200
+2024-09-10 19:17:17,419 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
+2024-09-10 19:17:17,420 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0071s with status code 200

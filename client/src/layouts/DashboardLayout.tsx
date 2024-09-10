@@ -20,6 +20,8 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon, QuestionIcon } from '@chakra-ui/icons'
 import LoadingSpinner from '../components/Loading'
+import AuthWrapper from '../wrappers/AuthWrapper'
+
 
 // NavItem bileşeni
 const NavItem = ({ icon, children, to, onClick }: { icon: React.ReactNode, children: React.ReactNode, to: string, onClick: (to: string) => void }) => {
@@ -59,7 +61,7 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
   )
 }
 
-export default function DashboardLayout() {
+function DashboardLayout() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate()
@@ -198,3 +200,5 @@ export default function DashboardLayout() {
     </Flex>
   )
 }
+
+export default AuthWrapper(DashboardLayout);

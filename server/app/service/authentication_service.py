@@ -44,13 +44,13 @@ class AuthenticationService:
                 raise HTTPException(status_code=400, detail="Email already registered!")
 
             user = User(
+                username=payload.username,
                 email=payload.email,
                 password=helper.generate_hash_password(payload.password),
             )
             db.add(user)
             db.commit()
             db.refresh(user)
-
             return {"message": "Account created."}
         except SQLAlchemyError:
             db.rollback()
