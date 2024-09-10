@@ -2,6 +2,7 @@ import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { useState } from 'react';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Geçersiz email').required('Email gerekli'),
@@ -11,8 +12,9 @@ const SignInSchema = Yup.object().shape({
 const SignIn = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
 
-  const handleLogin = async (values: { email: string; password: string }) => {
+  const handleLogin = async (values: { email: string; password: string }, actions: any) => {
     try {
       const res = await fetch("http://localhost:8000/api/v1/authentication/login", {
         method: "POST",
@@ -23,6 +25,7 @@ const SignIn = () => {
         body: JSON.stringify(values),
       })
       if (res.status === 200) {
+        setIsLoginSuccessful(true);
         toast({
           title: 'Giriş başarılı.',
           description: "Yönlendiriliyorsunuz...",
@@ -43,7 +46,15 @@ const SignIn = () => {
         })
       }
     } catch (error) {
-      throw error;
+      toast({
+        title: 'Hata',
+        description: "Bir hata oluştu. Lütfen tekrar deneyin.",
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
+    } finally {
+      actions.setSubmitting(false);
     }
   }
 
@@ -55,9 +66,7 @@ const SignIn = () => {
           initialValues={{ email: '', password: '' }}
           validationSchema={SignInSchema}
           onSubmit={(values, actions) => {
-            // Burada giriş işlemlerini gerçekleştirin
-            handleLogin(values);
-            actions.setSubmitting(false);
+            handleLogin(values, actions);
           }}
         >
           {(props) => (
@@ -87,6 +96,7 @@ const SignIn = () => {
                   isLoading={props.isSubmitting}
                   type="submit"
                   width="full"
+                  isDisabled={isLoginSuccessful}
                 >
                   Giriş Yap
                 </Button>

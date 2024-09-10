@@ -2,6 +2,7 @@ import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Link
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { useState } from 'react';
 
 const SignUpSchema = Yup.object().shape({
   username: Yup.string().required('Kullanıcı adı gerekli'),
@@ -15,8 +16,9 @@ const SignUpSchema = Yup.object().shape({
 const SignUp = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
 
-  const handleRegister = async (values: { username: string, email: string, password: string }) => {
+  const handleRegister = async (values: { username: string, email: string, password: string }, actions: any) => {
     try {
       const res = await fetch("http://localhost:8000/api/v1/authentication/register", {
         method: "POST",
@@ -26,6 +28,7 @@ const SignUp = () => {
         body: JSON.stringify(values),
       })
       if (res.status === 201) {
+        setIsSignUpSuccessful(true);
         toast({
           title: 'Hesap oluşturma başarılı',
           description: "Yönlendiriliyorsunuz...",
@@ -38,7 +41,7 @@ const SignUp = () => {
         }, 1000)
       } else {
         toast({
-          title: 'Giriş başarısız.',
+          title: 'Kayıt başarısız.',
           description: "Bilgilerinizi kontrol ediniz!",
           status: 'warning',
           duration: 1000,
@@ -46,7 +49,15 @@ const SignUp = () => {
         })
       }
     } catch (error) {
-      throw error;
+      toast({
+        title: 'Hata',
+        description: "Bir hata oluştu. Lütfen tekrar deneyin.",
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
+    } finally {
+      actions.setSubmitting(false);
     }
   }
 
@@ -58,9 +69,7 @@ const SignUp = () => {
           initialValues={{ username: '', email: '', password: '', confirmPassword: '' }}
           validationSchema={SignUpSchema}
           onSubmit={(values, actions) => {
-            // Burada kayıt işlemlerini gerçekleştirin
-            handleRegister(values)
-            actions.setSubmitting(false);
+            handleRegister(values, actions);
           }}
         >
           {(props) => (
@@ -108,6 +117,7 @@ const SignUp = () => {
                   isLoading={props.isSubmitting}
                   type="submit"
                   width="full"
+                  isDisabled={isSignUpSuccessful}
                 >
                   Kayıt Ol
                 </Button>
