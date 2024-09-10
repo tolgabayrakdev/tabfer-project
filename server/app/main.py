@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .controller import authentication_controller, user_controller, ticket_controller
+from .controller import authentication_controller, user_controller
 
 from .database import engine
 from . import model
@@ -10,7 +10,6 @@ model.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Loglama middleware'ini ekleyin
 app.middleware("http")(logging_middleware)
 
 origins = ["http://localhost:5173", "https://localhost:5173"]
@@ -27,7 +26,6 @@ app.include_router(
     router=authentication_controller.router, prefix="/api/v1/authentication"
 )
 app.include_router(router=user_controller.router, prefix="/api/v1/user")
-app.include_router(router=user_controller.router, prefix="/api/v1/ticket")
 
 
 @app.get("/")

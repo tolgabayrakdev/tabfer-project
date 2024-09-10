@@ -446,3 +446,66 @@
 2024-09-09 20:55:50,544 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0016s with status code 401
 2024-09-09 20:55:50,713 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0017s with status code 401
 2024-09-09 20:55:50,713 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0019s with status code 401
+2024-09-10 18:05:43,909 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:05:44,802 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:05:48,150 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:05:48,846 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:05:49,591 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:05:50,233 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:05:57,012 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:05:57,703 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:05:58,115 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:05:58,752 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:06:35,032 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:06:35,717 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:06:38,870 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:06:39,590 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:07:20,818 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:07:21,706 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:07:43,650 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:07:44,513 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:07:48,785 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:07:49,433 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:07:59,155 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:07:59,840 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:08:44,030 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0008s with status code 404
+2024-09-10 18:08:44,031 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0010s with status code 404
+2024-09-10 18:10:08,964 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:09,467 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:19,016 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:23,563 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:27,169 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:27,593 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:10:29,827 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:10:30,250 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:15,063 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:15,827 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:16,953 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:17,676 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:37,644 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:38,479 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:38,840 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:39,518 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:42,992 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:43,676 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:47,582 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:48,292 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:49,084 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:11:49,791 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:11:53,943 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0012s with status code 404
+2024-09-10 18:11:53,944 - app.middleware.logging_middleware - INFO - POST /api/v1/auth/verify completed in 0.0012s with status code 404
+2024-09-10 18:40:35,168 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:40:35,746 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:40:36,104 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:45:34,585 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:45:35,150 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:45:35,737 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:45:36,320 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:45:36,994 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:45:38,750 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:45:39,431 - watchfiles.main - INFO - 4 changes detected
+2024-09-10 18:45:40,121 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:45:40,483 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:45:41,153 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 18:46:04,399 - watchfiles.main - INFO - 1 change detected
+2024-09-10 18:46:09,373 - watchfiles.main - INFO - 1 change detected
