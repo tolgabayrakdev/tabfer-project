@@ -18,7 +18,7 @@ import {
   Spacer,
   useColorModeValue
 } from '@chakra-ui/react'
-import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon, QuestionIcon } from '@chakra-ui/icons'
 import LoadingSpinner from '../components/Loading'
 
 // NavItem bileşeni
@@ -51,6 +51,9 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
       </NavItem>
       <NavItem icon={<TriangleUpIcon />} to="/dashboard/profile" onClick={onNavigate}>
         Profil
+      </NavItem>
+      <NavItem icon={<QuestionIcon />} to="/dashboard/customer-support" onClick={onNavigate}>
+        Müşteri Destek
       </NavItem>
     </VStack>
   )

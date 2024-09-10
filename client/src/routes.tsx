@@ -9,7 +9,8 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
-
+const DashboardCustomerSupportPage = lazy(() => import('./pages/dashboard/CustomerSupport'));
+const CreateTicketPage = lazy(() => import('./pages/CreateTicket'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -32,11 +33,16 @@ const routes = createBrowserRouter([
         element: <ForgotPasswordPage />
     },
     {
+        path: "/create-ticket",
+        element: <CreateTicketPage />
+    },
+    {
         path: "/dashboard",
         element: <DashboardLayout />,
         children: [
             { path: "", element: <DashboardIndexPage />, index: true },
             { path: "profile", element: <DashboardProfilePage /> },
+            { path: "customer-support", element: <DashboardCustomerSupportPage /> },
         ]
     }
 ]);

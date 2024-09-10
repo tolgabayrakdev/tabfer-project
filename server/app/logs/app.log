@@ -434,3 +434,15 @@
 2024-09-09 20:10:37,444 - app.middleware.logging_middleware - INFO - POST /api/v1/monitoring/start-monitoring completed in 0.0053s with status code 200
 2024-09-09 20:10:53,933 - app.middleware.logging_middleware - INFO - POST /api/v1/monitoring/start-monitoring completed in 0.0024s with status code 200
 2024-09-09 20:11:12,953 - app.middleware.logging_middleware - INFO - POST /api/v1/monitoring/start-monitoring completed in 0.0053s with status code 200
+2024-09-09 20:55:12,378 - app.middleware.logging_middleware - INFO - GET / completed in 0.0011s with status code 200
+2024-09-09 20:55:12,630 - app.middleware.logging_middleware - INFO - GET / completed in 0.0008s with status code 200
+2024-09-09 20:55:15,488 - app.middleware.logging_middleware - INFO - GET /docs completed in 0.0004s with status code 200
+2024-09-09 20:55:15,625 - app.middleware.logging_middleware - INFO - GET /openapi.json completed in 0.0064s with status code 200
+2024-09-09 20:55:48,989 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0030s with status code 401
+2024-09-09 20:55:48,991 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0031s with status code 401
+2024-09-09 20:55:50,418 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0017s with status code 401
+2024-09-09 20:55:50,418 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0018s with status code 401
+2024-09-09 20:55:50,543 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0014s with status code 401
+2024-09-09 20:55:50,544 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0016s with status code 401
+2024-09-09 20:55:50,713 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0017s with status code 401
+2024-09-09 20:55:50,713 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0019s with status code 401
