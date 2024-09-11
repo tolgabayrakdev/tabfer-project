@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Box, Button, Input, Grid, GridItem,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
   FormControl, FormLabel, Select, useDisclosure, VStack, HStack, useToast,
-  Text, Spinner, Badge, Textarea, Flex, useColorModeValue
+  Text, Spinner, Badge, Textarea, Flex, useColorModeValue,
+  AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay
 } from '@chakra-ui/react';
 import { AddIcon, EditIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
@@ -14,11 +15,11 @@ type Contact = {
 
 type Ticket = {
   id: string;
-  assigneeId: string;
+  contact_id: string;
   subject: string;
   description: string;
   status: 'open' | 'closed';
-  createdAt: string;
+  created_at: string;
 };
 
 export default function Ticket() {
@@ -31,48 +32,58 @@ export default function Ticket() {
   const [currentPage, setCurrentPage] = useState(1);
   const [ticketsPerPage] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPages, setTotalPages] = useState(1);
+  const [isContactsLoading, setIsContactsLoading] = useState(true);
+  const [deleteAlert, setDeleteAlert] = useState<{ isOpen: boolean; ticketId: string | null }>({ isOpen: false, ticketId: null });
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
-  const getTicketCounts = useCallback(() => {
-    const openCount = tickets.filter(t => t.status === 'open').length;
-    const closedCount = tickets.filter(t => t.status === 'closed').length;
-    const totalCount = openCount + closedCount;
-    return { openCount, closedCount, totalCount };
-  }, [tickets]);
-
-  const fetchTickets = useCallback(async (page: number) => {
+  const fetchTickets = useCallback(async () => {
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    const sampleTickets: Ticket[] = Array.from({ length: 50 }, (_, index) => ({
-      id: (index + 1).toString(),
-      assigneeId: (Math.floor(Math.random() * 5) + 1).toString(),
-      subject: `Ticket Subject ${index + 1}`,
-      description: `Description for ticket ${index + 1}`,
-      status: Math.random() > 0.5 ? 'open' : 'closed',
-      createdAt: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString(),
-    }));
-    const startIndex = (page - 1) * ticketsPerPage;
-    const paginatedTickets = sampleTickets.slice(startIndex, startIndex + ticketsPerPage);
-    setTickets(paginatedTickets);
-    setTotalPages(Math.ceil(sampleTickets.length / ticketsPerPage));
-    setIsLoading(false);
-  }, [ticketsPerPage]);
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/ticket', {
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Tickets fetching failed');
+      const data = await res.json();
+      setTickets(data);
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+      toast({
+        title: 'Error fetching tickets',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [toast]);
 
   const fetchContacts = async () => {
-    const sampleContacts: Contact[] = [
-      { id: '1', name: 'John Doe' },
-      { id: '2', name: 'Jane Smith' },
-      { id: '3', name: 'Alice Johnson' },
-      { id: '4', name: 'Bob Williams' },
-      { id: '5', name: 'Charlie Brown' },
-    ];
-    setContacts(sampleContacts);
+    setIsContactsLoading(true);
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/contact', {
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Contacts fetching failed');
+      const data = await res.json();
+      setContacts(data);
+    } catch (error) {
+      console.error('Error fetching contacts:', error);
+      toast({
+        title: 'Error fetching contacts',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsContactsLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetchTickets(currentPage);
+    fetchTickets();
     fetchContacts();
-  }, [currentPage, fetchTickets]);
+  }, [fetchTickets]);
 
   const handleAdd = () => {
     setEditingTicket(null);
@@ -84,55 +95,101 @@ export default function Ticket() {
     onOpen();
   };
 
-  const handleDelete = async (id: string) => {
-    setTickets(tickets.filter(ticket => ticket.id !== id));
-    toast({
-      title: 'Ticket silindi',
-      status: 'success',
-      duration: 2000,
-      isClosable: true,
-    });
+  const handleDelete = (id: string) => {
+    setDeleteAlert({ isOpen: true, ticketId: id });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const confirmDelete = async () => {
+    if (deleteAlert.ticketId) {
+      try {
+        const res = await fetch(`http://localhost:8000/api/v1/ticket/${deleteAlert.ticketId}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+
+        if (!res.ok) throw new Error('Ticket deletion failed');
+
+        await fetchTickets();
+
+        toast({
+          title: 'Ticket silindi',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        toast({
+          title: 'Silme işlemi başarısız',
+          description: (error as Error).message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    }
+    setDeleteAlert({ isOpen: false, ticketId: null });
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newTicket = {
-      id: editingTicket?.id || Date.now().toString(),
-      assigneeId: formData.get('assigneeId') as string,
+      contact_id: formData.get('contact_id') as string,
       subject: formData.get('subject') as string,
       description: formData.get('description') as string,
       status: formData.get('status') as 'open' | 'closed',
-      createdAt: editingTicket?.createdAt || new Date().toISOString(),
     };
 
-    if (editingTicket) {
-      setTickets(tickets.map(ticket => ticket.id === editingTicket.id ? newTicket : ticket));
+    try {
+      const url = editingTicket
+        ? `http://localhost:8000/api/v1/ticket/${editingTicket.id}`
+        : 'http://localhost:8000/api/v1/ticket';
+      const method = editingTicket ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTicket),
+        credentials: 'include',
+      });
+
+      if (!res.ok) throw new Error(editingTicket ? 'Ticket update failed' : 'Ticket creation failed');
+
+      await fetchTickets();
+
       toast({
-        title: 'Ticket güncellendi',
+        title: editingTicket ? 'Ticket güncellendi' : 'Yeni ticket eklendi',
         status: 'success',
         duration: 2000,
         isClosable: true,
       });
-    } else {
-      setTickets([...tickets, newTicket]);
+      
+      onClose();
+    } catch (error) {
+      console.error('Error:', error);
       toast({
-        title: 'Yeni ticket eklendi',
-        status: 'success',
-        duration: 2000,
+        title: 'Bir hata oluştu',
+        description: (error as Error).message,
+        status: 'error',
+        duration: 3000,
         isClosable: true,
       });
     }
-    onClose();
   };
 
   const filteredTickets = tickets.filter(ticket => 
     statusFilter === 'all' ? true : ticket.status === statusFilter
   );
 
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const indexOfLastTicket = currentPage * ticketsPerPage;
+  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
+  const currentTickets = filteredTickets.slice(indexOfFirstTicket, indexOfLastTicket);
+  const totalPages = Math.ceil(filteredTickets.length / ticketsPerPage);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const getStatusColor = (status: 'open' | 'closed') => {
     return status === 'open' ? 'green' : 'red';
@@ -143,18 +200,11 @@ export default function Ticket() {
     return new Date(dateString).toLocaleDateString('tr-TR', options);
   };
 
-  // Renk moduna göre arka plan ve metin rengini ayarlayalım
   const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('gray.800', 'white');
 
   return (
     <Box>
-      <HStack justifyContent="space-between" mb={4}>
-        <Text fontWeight="bold">Toplam Ticket: {getTicketCounts().totalCount}</Text>
-        <Text fontWeight="bold">Açık Ticket: {getTicketCounts().openCount}</Text>
-        <Text fontWeight="bold">Kapalı Ticket: {getTicketCounts().closedCount}</Text>
-      </HStack>
-
       <HStack justifyContent="space-between" mb={4}>
         <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
           Yeni Ticket Ekle
@@ -170,14 +220,14 @@ export default function Ticket() {
         </Select>
       </HStack>
 
-      {isLoading ? (
+      {isLoading || isContactsLoading ? (
         <Flex justify="center" align="center" minHeight="300px">
           <Spinner size="xl" />
         </Flex>
       ) : (
         <>
           <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
-            {filteredTickets.map((ticket) => (
+            {currentTickets.map((ticket) => (
               <GridItem key={ticket.id} bg={bgColor} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
                 <VStack align="stretch" spacing={3}>
                   <Flex justify="space-between" align="center">
@@ -188,8 +238,8 @@ export default function Ticket() {
                   </Flex>
                   <Text fontWeight="bold" fontSize="lg" color={textColor}>{ticket.subject}</Text>
                   <Text fontSize="sm" noOfLines={2} color={textColor}>{ticket.description}</Text>
-                  <Text fontSize="sm" color={textColor}>İlgili Kişi: {contacts.find(c => c.id === ticket.assigneeId)?.name || 'Bilinmiyor'}</Text>
-                  <Text fontSize="sm" color="gray.500">Oluşturma Tarihi: {formatDate(ticket.createdAt)}</Text>
+                  <Text fontSize="sm" color={textColor}>İlgili Kişi: {contacts.find(c => c.id === ticket.contact_id)?.name || 'Bilinmiyor'}</Text>
+                  <Text fontSize="sm" color="gray.500">Oluşturma Tarihi: {formatDate(ticket.created_at)}</Text>
                   <HStack>
                     <Button size="sm" leftIcon={<EditIcon />} onClick={() => handleEdit(ticket)}>
                       Düzenle
@@ -233,7 +283,7 @@ export default function Ticket() {
               <VStack spacing={4}>
                 <FormControl isRequired>
                   <FormLabel color={textColor}>İlgili Kişi</FormLabel>
-                  <Select name="assigneeId" defaultValue={editingTicket?.assigneeId} bg={bgColor} color={textColor}>
+                  <Select name="contact_id" defaultValue={editingTicket?.contact_id} bg={bgColor} color={textColor}>
                     {contacts.map(contact => (
                       <option key={contact.id} value={contact.id}>{contact.name}</option>
                     ))}
@@ -265,6 +315,33 @@ export default function Ticket() {
           </form>
         </ModalContent>
       </Modal>
+
+      <AlertDialog
+        isOpen={deleteAlert.isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={() => setDeleteAlert({ isOpen: false, ticketId: null })}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Ticket'ı Sil
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Bu işlem geri alınamaz. Bu ticket'ı silmek istediğinizden emin misiniz?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={() => setDeleteAlert({ isOpen: false, ticketId: null })}>
+                İptal
+              </Button>
+              <Button colorScheme="red" onClick={confirmDelete} ml={3}>
+                Sil
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
   );
 }
