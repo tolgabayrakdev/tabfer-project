@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box, Button, Input, Table, Thead, Tbody, Tr, Th, Td,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
   FormControl, FormLabel, Select, useDisclosure, VStack, HStack, useToast,
-  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper
+  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper,
+  Text, Spinner, Badge
 } from '@chakra-ui/react';
-import { AddIcon, EditIcon, DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon, DeleteIcon, DownloadIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -29,26 +30,43 @@ export default function Deal() {
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dealsPerPage] = useState(8);
+  const [isLoading, setIsLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchDeals = useCallback(async (page: number) => {
+    setIsLoading(true);
+    // TODO: API'den deals verilerini çek
+    // Örnek veri oluşturma (gerçek uygulamada bu kısım API çağrısı olacak)
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simüle edilmiş gecikme
+    const sampleDeals: Deal[] = Array.from({ length: 50 }, (_, index) => ({
+      id: (index + 1).toString(),
+      title: `Deal ${index + 1}`,
+      amount: Math.floor(Math.random() * 10000),
+      status: ['Open', 'Closed', 'Pending'][Math.floor(Math.random() * 3)],
+      contactId: Math.floor(Math.random() * 5 + 1).toString()
+    }));
+    const startIndex = (page - 1) * dealsPerPage;
+    const paginatedDeals = sampleDeals.slice(startIndex, startIndex + dealsPerPage);
+    setDeals(paginatedDeals);
+    setTotalPages(Math.ceil(sampleDeals.length / dealsPerPage));
+    setIsLoading(false);
+  }, [dealsPerPage]);
 
   useEffect(() => {
-    fetchDeals();
+    fetchDeals(currentPage);
     fetchContacts();
-  }, []);
-
-  const fetchDeals = async () => {
-    // TODO: API'den deals verilerini çek
-    const sampleDeals: Deal[] = [
-      { id: '1', title: 'Deal 1', amount: 1000, status: 'Open', contactId: '1' },
-      { id: '2', title: 'Deal 2', amount: 2000, status: 'Closed', contactId: '2' },
-    ];
-    setDeals(sampleDeals);
-  };
+  }, [currentPage, fetchDeals]);
 
   const fetchContacts = async () => {
     // TODO: API'den contacts verilerini çek
     const sampleContacts: Contact[] = [
       { id: '1', name: 'John Doe' },
       { id: '2', name: 'Jane Smith' },
+      { id: '3', name: 'Alice Johnson' },
+      { id: '4', name: 'Bob Williams' },
+      { id: '5', name: 'Charlie Brown' },
     ];
     setContacts(sampleContacts);
   };
@@ -141,6 +159,23 @@ export default function Deal() {
     });
   };
 
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Open':
+        return 'green';
+      case 'Closed':
+        return 'red';
+      case 'Pending':
+        return 'orange';
+      default:
+        return 'gray';
+    }
+  };
+
   return (
     <Box>
       <HStack justifyContent="space-between" mb={4}>
@@ -160,35 +195,66 @@ export default function Deal() {
         </Button>
       </HStack>
 
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>Başlık</Th>
-            <Th>Miktar</Th>
-            <Th>Durum</Th>
-            <Th>İlgili Kişi</Th>
-            <Th>İşlemler</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {filteredDeals.map((deal) => (
-            <Tr key={deal.id}>
-              <Td>{deal.title}</Td>
-              <Td>{deal.amount}</Td>
-              <Td>{deal.status}</Td>
-              <Td>{contacts.find(c => c.id === deal.contactId)?.name}</Td>
-              <Td>
-                <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(deal)}>
-                  Düzenle
-                </Button>
-                <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDelete(deal.id)}>
-                  Sil
-                </Button>
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      {isLoading ? (
+        <Box textAlign="center" py={10}>
+          <Spinner size="xl" />
+          <Text mt={4}>Yükleniyor...</Text>
+        </Box>
+      ) : (
+        <>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Başlık</Th>
+                <Th>Miktar</Th>
+                <Th>Durum</Th>
+                <Th>İlgili Kişi</Th>
+                <Th>İşlemler</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {filteredDeals.map((deal) => (
+                <Tr key={deal.id}>
+                  <Td>{deal.title}</Td>
+                  <Td>{deal.amount}₺</Td>
+                  <Td>
+                    <Badge colorScheme={getStatusColor(deal.status)}>
+                      {deal.status}
+                    </Badge>
+                  </Td>
+                  <Td>{contacts.find(c => c.id === deal.contactId)?.name}</Td>
+                  <Td>
+                    <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(deal)}>
+                      Düzenle
+                    </Button>
+                    <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDelete(deal.id)}>
+                      Sil
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+
+          <HStack justifyContent="center" mt={4}>
+            <Button
+              onClick={() => paginate(currentPage - 1)}
+              isDisabled={currentPage === 1}
+              leftIcon={<ChevronLeftIcon />}
+            >
+              Önceki
+            </Button>
+            <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
+            <Button
+              onClick={() => paginate(currentPage + 1)}
+              isDisabled={currentPage === totalPages}
+              rightIcon={<ChevronRightIcon />}
+            >
+              Sonraki
+            </Button>
+          </HStack>
+        </>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

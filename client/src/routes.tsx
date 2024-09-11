@@ -12,6 +12,7 @@ const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
 const DashboardContactPage = lazy(() => import('./pages/dashboard/Contact'));
 const DashboardDealPage = lazy(() => import('./pages/dashboard/Deal'));
+const DashboardTicketPage = lazy(() => import('./pages/dashboard/Ticket'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -42,6 +43,7 @@ const routes = createBrowserRouter([
             { path: "contacts", element: <DashboardContactPage /> },
             { path: "contacts", element: <Contact /> }, 
             { path: "deals", element: <DashboardDealPage /> },
+            { path: "tickets", element: <DashboardTicketPage /> },
         ]
     }
 ]);

@@ -21,6 +21,7 @@ import {
 import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon, QuestionIcon, PhoneIcon } from '@chakra-ui/icons'
 import LoadingSpinner from '../components/Loading'
 import AuthWrapper from '../wrappers/AuthWrapper'
+import { FaTicketAlt } from 'react-icons/fa';
 
 
 // NavItem bileşeni
@@ -59,6 +60,9 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
       </NavItem>
       <NavItem icon={<QuestionIcon />} to="/dashboard/deals" onClick={onNavigate}>
         Deals
+      </NavItem>
+      <NavItem icon={<FaTicketAlt />} to="/dashboard/tickets" onClick={onNavigate}>
+        Tickets
       </NavItem>
     </VStack>
   )
