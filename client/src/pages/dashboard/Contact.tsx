@@ -10,7 +10,8 @@ import { AddIcon, EditIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from
 
 type Contact = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
 };
@@ -31,16 +32,27 @@ export default function Contact() {
     fetchContacts();
   }, []);
 
+  useEffect(() => {
+    fetchContacts()
+  },[])
+
   const fetchContacts = async () => {
-    // 50 adet örnek veri oluştur
-    const sampleContacts: Contact[] = Array.from({ length: 50 }, (_, index) => ({
-      id: (index + 1).toString(),
-      name: `User ${index + 1}`,
-      email: `user${index + 1}@example.com`,
-      phone: `123-456-${index.toString().padStart(4, '0')}`
-    }));
-    setContacts(sampleContacts);
+    try {
+      const res = await fetch("http://localhost:8000/api/v1/contact", {
+        method: "GET",
+        credentials: "include"
+      });
+      const data = await res.json();
+      console.log(data);
+      
+      if (res.status === 200) {
+        setContacts(data);
+      }
+    } catch (error) {
+      throw error;
+    }
   };
+  
 
   const handleAdd = () => {
     setEditingContact(null);
@@ -66,54 +78,112 @@ export default function Contact() {
   };
 
   const handleDelete = async (id: string) => {
-    // TODO: API'ye silme isteği gönder
-    setContacts(contacts.filter(contact => contact.id !== id));
-    toast({
-      title: 'Kişi silindi',
-      status: 'success',
-      duration: 2000,
-      isClosable: true,
-    });
+    try {
+      const res = await fetch(`http://localhost:8000/api/v1/contact/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        setContacts(contacts.filter(contact => contact.id !== id));
+        toast({
+          title: 'Kişi silindi',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        throw new Error('Kişi silinirken bir hata oluştu');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: 'Bir hata oluştu',
+        description: (error as Error).message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const newContact = {
-      id: editingContact?.id || Date.now().toString(),
-      name: formData.get('name') as string,
+    const newContact: Omit<Contact, 'id'> = {
+      first_name: formData.get('name') as string,
+      last_name: formData.get('surname') as string,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
     };
 
-    if (editingContact) {
-      // TODO: API'ye güncelleme isteği gönder
-      setContacts(contacts.map(contact => 
-        contact.id === editingContact.id ? newContact : contact
-      ));
+    try {
+      if (editingContact) {
+        const res = await fetch(`http://localhost:8000/api/v1/contact/${editingContact.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newContact),
+          credentials: 'include',
+        });
+
+        if (res.ok) {
+          const updatedContact = await res.json();
+          setContacts(contacts.map(contact =>
+            contact.id === editingContact.id ? updatedContact : contact
+          ));
+          toast({
+            title: 'Kişi güncellendi',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          throw new Error('Kişi güncellenirken bir hata oluştu');
+        }
+      } else {
+        const res = await fetch('http://localhost:8000/api/v1/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newContact),
+          credentials: 'include',
+        });
+
+        if (res.ok) {
+          const createdContact = await res.json();
+          setContacts([...contacts, createdContact]);
+          toast({
+            title: 'Kişi eklendi',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          throw new Error('Kişi eklenirken bir hata oluştu');
+        }
+      }
+      onClose();
+    } catch (error) {
+      console.error('Error:', error);
       toast({
-        title: 'Kişi güncellendi',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-      });
-    } else {
-      // TODO: API'ye ekleme isteği gönder
-      setContacts([...contacts, newContact]);
-      toast({
-        title: 'Kişi eklendi',
-        status: 'success',
-        duration: 2000,
+        title: 'Bir hata oluştu',
+        description: (error as Error).message,
+        status: 'error',
+        duration: 3000,
         isClosable: true,
       });
     }
-    onClose();
   };
 
   const filteredContacts = contacts.filter(
     (contact) =>
-      contact.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      contact.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
+      contact.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
       contact.email.toLowerCase().includes(searchText.toLowerCase()) ||
+      contact.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
       contact.phone.toLowerCase().includes(searchText.toLowerCase())
   );
 
@@ -151,7 +221,7 @@ export default function Contact() {
           <Tbody>
             {currentContacts.map((contact) => (
               <Tr key={contact.id}>
-                <Td>{contact.name}</Td>
+                <Td>{contact.first_name} {contact.last_name}</Td>
                 <Td>{contact.email}</Td>
                 <Td>{contact.phone}</Td>
                 <Td>
@@ -197,7 +267,11 @@ export default function Contact() {
               <VStack spacing={4}>
                 <FormControl isRequired>
                   <FormLabel>Ad</FormLabel>
-                  <Input name="name" defaultValue={editingContact?.name} />
+                  <Input name="name" defaultValue={editingContact?.first_name} />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>Soyad</FormLabel>
+                  <Input name="surname" defaultValue={editingContact?.last_name} />
                 </FormControl>
                 <FormControl isRequired>
                   <FormLabel>E-posta</FormLabel>
@@ -231,7 +305,7 @@ export default function Contact() {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Bu işlem geri alınamaz. Devam etmek istiyor musunuz?
+              Bu işlem geri alınamaz. Kişiyi sildiğinizde, bu kişiyle ilişkili tüm anlaşmalar ve biletler de silinecektir. Devam etmek istiyor musunuz?
             </AlertDialogBody>
 
             <AlertDialogFooter>

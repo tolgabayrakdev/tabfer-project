@@ -20,7 +20,7 @@ type Deal = {
   title: string;
   amount: number;
   status: string;
-  contactId: string;
+  contact_id: string;
 };
 
 export default function Deal() {
@@ -33,44 +33,76 @@ export default function Deal() {
   const [currentPage, setCurrentPage] = useState(1);
   const [dealsPerPage] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPages, setTotalPages] = useState(1);
   const [deleteAlert, setDeleteAlert] = useState<{ isOpen: boolean; dealId: string | null }>({ isOpen: false, dealId: null });
   const cancelRef = useRef<HTMLButtonElement>(null);
+  const [allDeals, setAllDeals] = useState<Deal[]>([]);
+  const [filteredDeals, setFilteredDeals] = useState<Deal[]>([]);
+  const [isContactsLoading, setIsContactsLoading] = useState(true);
 
-  const fetchDeals = useCallback(async (page: number) => {
+  const fetchDeals = useCallback(async () => {
     setIsLoading(true);
-    // TODO: API'den deals verilerini çek
-    // Örnek veri oluşturma (gerçek uygulamada bu kısım API çağrısı olacak)
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simüle edilmiş gecikme
-    const sampleDeals: Deal[] = Array.from({ length: 50 }, (_, index) => ({
-      id: (index + 1).toString(),
-      title: `Deal ${index + 1}`,
-      amount: Math.floor(Math.random() * 10000),
-      status: ['Open', 'Closed', 'Pending'][Math.floor(Math.random() * 3)],
-      contactId: Math.floor(Math.random() * 5 + 1).toString()
-    }));
-    const startIndex = (page - 1) * dealsPerPage;
-    const paginatedDeals = sampleDeals.slice(startIndex, startIndex + dealsPerPage);
-    setDeals(paginatedDeals);
-    setTotalPages(Math.ceil(sampleDeals.length / dealsPerPage));
-    setIsLoading(false);
-  }, [dealsPerPage]);
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/deal', {
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Deals fetching failed');
+      const data = await res.json();
+      setAllDeals(data);
+      setFilteredDeals(data);
+    } catch (error) {
+      console.error('Error fetching deals:', error);
+      toast({
+        title: 'Error fetching deals',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [toast]);
 
   useEffect(() => {
-    fetchDeals(currentPage);
+    fetchDeals();
     fetchContacts();
-  }, [currentPage, fetchDeals]);
+  }, [fetchDeals]);
+
+  useEffect(() => {
+    const filtered = allDeals.filter(deal => 
+      statusFilter === 'All' ? true : deal.status === statusFilter
+    );
+    setFilteredDeals(filtered);
+    setCurrentPage(1); // Reset to first page when filter changes
+  }, [statusFilter, allDeals]);
+
+  // Pagination için hesaplamalar
+  const indexOfLastDeal = currentPage * dealsPerPage;
+  const indexOfFirstDeal = indexOfLastDeal - dealsPerPage;
+  const currentDeals = filteredDeals.slice(indexOfFirstDeal, indexOfLastDeal);
+  const totalPages = Math.ceil(filteredDeals.length / dealsPerPage);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const fetchContacts = async () => {
-    // TODO: API'den contacts verilerini çek
-    const sampleContacts: Contact[] = [
-      { id: '1', name: 'John Doe' },
-      { id: '2', name: 'Jane Smith' },
-      { id: '3', name: 'Alice Johnson' },
-      { id: '4', name: 'Bob Williams' },
-      { id: '5', name: 'Charlie Brown' },
-    ];
-    setContacts(sampleContacts);
+    setIsContactsLoading(true);
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/contact', {
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Contacts fetching failed');
+      const data = await res.json();
+      setContacts(data);
+    } catch (error) {
+      console.error('Error fetching contacts:', error);
+      toast({
+        title: 'Error fetching contacts',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsContactsLoading(false);
+    }
   };
 
   const handleAdd = () => {
@@ -89,14 +121,33 @@ export default function Deal() {
 
   const confirmDelete = async () => {
     if (deleteAlert.dealId) {
-      // TODO: API'ye silme isteği gönder
-      setDeals(deals.filter(deal => deal.id !== deleteAlert.dealId));
-      toast({
-        title: 'Deal silindi',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-      });
+      try {
+        const res = await fetch(`http://localhost:8000/api/v1/deal/${deleteAlert.dealId}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+
+        if (!res.ok) throw new Error('Deal deletion failed');
+
+        // Deals'i yeniden çek
+        await fetchDeals();
+
+        toast({
+          title: 'Deal silindi',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        toast({
+          title: 'Silme işlemi başarısız',
+          description: (error as Error).message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
     setDeleteAlert({ isOpen: false, dealId: null });
   };
@@ -105,42 +156,55 @@ export default function Deal() {
     setDeleteAlert({ isOpen: false, dealId: null });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newDeal = {
-      id: editingDeal?.id || Date.now().toString(),
       title: formData.get('title') as string,
       amount: Number(formData.get('amount')),
       status: formData.get('status') as string,
-      contactId: formData.get('contactId') as string,
+      contact_id: formData.get('contactId') as string,
     };
 
-    if (editingDeal) {
-      // TODO: API'ye güncelleme isteği gönder
-      setDeals(deals.map(deal => deal.id === editingDeal.id ? newDeal : deal));
+    try {
+      const url = editingDeal
+        ? `http://localhost:8000/api/v1/deal/${editingDeal.id}`
+        : 'http://localhost:8000/api/v1/deal';
+      const method = editingDeal ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newDeal),
+        credentials: 'include',
+      });
+
+      if (!res.ok) throw new Error(editingDeal ? 'Deal update failed' : 'Deal creation failed');
+
+      // Deals'i yeniden çek
+      await fetchDeals();
+
       toast({
-        title: 'Deal güncellendi',
+        title: editingDeal ? 'Deal güncellendi' : 'Yeni deal eklendi',
         status: 'success',
         duration: 2000,
         isClosable: true,
       });
-    } else {
-      // TODO: API'ye ekleme isteği gönder
-      setDeals([...deals, newDeal]);
+      
+      onClose();
+    } catch (error) {
+      console.error('Error:', error);
       toast({
-        title: 'Yeni deal eklendi',
-        status: 'success',
-        duration: 2000,
+        title: 'Bir hata oluştu',
+        description: (error as Error).message,
+        status: 'error',
+        duration: 3000,
         isClosable: true,
       });
     }
-    onClose();
   };
-
-  const filteredDeals = deals.filter(deal => 
-    statusFilter === 'All' ? true : deal.status === statusFilter
-  );
 
   const exportToPDF = () => {
     const doc = new jsPDF();
@@ -152,7 +216,7 @@ export default function Deal() {
         deal.title,
         deal.amount,
         deal.status,
-        contacts.find(c => c.id === deal.contactId)?.name || 'Bilinmiyor'
+        contacts.find(c => c.id === deal.contact_id)?.name || 'Bilinmiyor'
       ];
       tableRows.push(dealData);
     });
@@ -170,10 +234,6 @@ export default function Deal() {
       duration: 2000,
       isClosable: true,
     });
-  };
-
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
   };
 
   const getStatusColor = (status: string) => {
@@ -208,7 +268,7 @@ export default function Deal() {
         </Button>
       </HStack>
 
-      {isLoading ? (
+      {isLoading || isContactsLoading ? (
         <Box textAlign="center" py={10}>
           <Spinner size="xl" />
           <Text mt={4}>Yükleniyor...</Text>
@@ -226,7 +286,7 @@ export default function Deal() {
               </Tr>
             </Thead>
             <Tbody>
-              {filteredDeals.map((deal) => (
+              {currentDeals.map((deal) => (
                 <Tr key={deal.id}>
                   <Td>{deal.title}</Td>
                   <Td>{deal.amount}₺</Td>
@@ -235,7 +295,7 @@ export default function Deal() {
                       {deal.status}
                     </Badge>
                   </Td>
-                  <Td>{contacts.find(c => c.id === deal.contactId)?.name}</Td>
+                  <Td>{contacts.find(c => c.id === deal.contact_id)?.name || 'Bilinmiyor'}</Td>
                   <Td>
                     <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(deal)}>
                       Düzenle
@@ -301,7 +361,7 @@ export default function Deal() {
                 </FormControl>
                 <FormControl isRequired>
                   <FormLabel>İlgili Kişi</FormLabel>
-                  <Select name="contactId" defaultValue={editingDeal?.contactId}>
+                  <Select name="contactId" defaultValue={editingDeal?.contact_id}>
                     {contacts.map(contact => (
                       <option key={contact.id} value={contact.id}>{contact.name}</option>
                     ))}
