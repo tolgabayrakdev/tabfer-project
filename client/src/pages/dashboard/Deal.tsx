@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Box, Button, Input, Table, Thead, Tbody, Tr, Th, Td,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
   FormControl, FormLabel, Select, useDisclosure, VStack, HStack, useToast,
   NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper,
-  Text, Spinner, Badge
+  Text, Spinner, Badge, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay
 } from '@chakra-ui/react';
 import { AddIcon, EditIcon, DeleteIcon, DownloadIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import jsPDF from 'jspdf';
@@ -34,6 +34,8 @@ export default function Deal() {
   const [dealsPerPage] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
+  const [deleteAlert, setDeleteAlert] = useState<{ isOpen: boolean; dealId: string | null }>({ isOpen: false, dealId: null });
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   const fetchDeals = useCallback(async (page: number) => {
     setIsLoading(true);
@@ -82,14 +84,25 @@ export default function Deal() {
   };
 
   const handleDelete = async (id: string) => {
-    // TODO: API'ye silme isteği gönder
-    setDeals(deals.filter(deal => deal.id !== id));
-    toast({
-      title: 'Deal silindi',
-      status: 'success',
-      duration: 2000,
-      isClosable: true,
-    });
+    setDeleteAlert({ isOpen: true, dealId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (deleteAlert.dealId) {
+      // TODO: API'ye silme isteği gönder
+      setDeals(deals.filter(deal => deal.id !== deleteAlert.dealId));
+      toast({
+        title: 'Deal silindi',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+    setDeleteAlert({ isOpen: false, dealId: null });
+  };
+
+  const cancelDelete = () => {
+    setDeleteAlert({ isOpen: false, dealId: null });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -305,6 +318,33 @@ export default function Deal() {
           </form>
         </ModalContent>
       </Modal>
+
+      <AlertDialog
+        isOpen={deleteAlert.isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={cancelDelete}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Deal'i Sil
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Bu işlem geri alınamaz. Bu deal'i silmek istediğinizden emin misiniz?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={cancelDelete}>
+                İptal
+              </Button>
+              <Button colorScheme="red" onClick={confirmDelete} ml={3}>
+                Sil
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
   );
 }
