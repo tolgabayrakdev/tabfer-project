@@ -591,3 +591,168 @@
 2024-09-10 19:17:12,082 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0067s with status code 200
 2024-09-10 19:17:17,419 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
 2024-09-10 19:17:17,420 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0071s with status code 200
+2024-09-10 19:17:55,733 - app.middleware.logging_middleware - INFO - GET / completed in 0.0034s with status code 200
+2024-09-10 19:22:42,724 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0251s with status code 200
+2024-09-10 19:22:42,725 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0246s with status code 200
+2024-09-10 19:22:42,763 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0067s with status code 200
+2024-09-10 19:22:42,763 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0074s with status code 200
+2024-09-10 19:24:04,296 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0176s with status code 200
+2024-09-10 19:24:04,297 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0177s with status code 200
+2024-09-10 19:24:04,336 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0092s with status code 200
+2024-09-10 19:24:04,336 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0097s with status code 200
+2024-09-10 19:25:34,925 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0273s with status code 200
+2024-09-10 19:25:34,925 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0263s with status code 200
+2024-09-10 19:31:28,294 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0136s with status code 200
+2024-09-10 19:31:28,295 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0134s with status code 200
+2024-09-10 19:45:45,294 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0077s with status code 403
+2024-09-10 19:45:45,296 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0087s with status code 403
+2024-09-10 19:45:54,661 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0327s with status code 200
+2024-09-10 19:45:55,683 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0101s with status code 200
+2024-09-10 19:45:55,686 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0074s with status code 200
+2024-09-10 19:45:59,640 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0066s with status code 200
+2024-09-10 19:45:59,640 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0068s with status code 200
+2024-09-10 19:46:02,506 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0065s with status code 200
+2024-09-10 19:46:02,506 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0068s with status code 200
+2024-09-10 19:46:02,529 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0080s with status code 200
+2024-09-10 19:46:02,530 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0085s with status code 200
+2024-09-10 19:58:29,794 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0259s with status code 200
+2024-09-10 19:58:29,796 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0252s with status code 200
+2024-09-10 19:58:29,829 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0067s with status code 200
+2024-09-10 19:58:29,829 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0069s with status code 200
+2024-09-10 20:45:15,953 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0079s with status code 403
+2024-09-10 20:45:15,955 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0088s with status code 403
+2024-09-10 20:45:27,640 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0245s with status code 200
+2024-09-10 20:45:28,657 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0068s with status code 200
+2024-09-10 20:45:28,665 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0093s with status code 200
+2024-09-10 20:45:32,104 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0029s with status code 200
+2024-09-10 20:46:53,456 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0276s with status code 200
+2024-09-10 20:46:54,491 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0097s with status code 200
+2024-09-10 20:46:54,504 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0157s with status code 200
+2024-09-10 20:47:43,074 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0169s with status code 200
+2024-09-10 20:47:44,117 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0072s with status code 200
+2024-09-10 20:47:44,117 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0071s with status code 200
+2024-09-10 20:48:32,445 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0367s with status code 200
+2024-09-10 20:48:34,454 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0144s with status code 200
+2024-09-10 20:48:34,458 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0181s with status code 200
+2024-09-10 20:48:37,425 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0058s with status code 200
+2024-09-10 20:48:37,426 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0067s with status code 200
+2024-09-10 20:48:43,634 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0088s with status code 200
+2024-09-10 20:48:45,643 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0060s with status code 200
+2024-09-10 20:48:45,648 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0055s with status code 200
+2024-09-10 20:50:46,205 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0192s with status code 200
+2024-09-10 20:50:47,243 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0090s with status code 200
+2024-09-10 20:50:47,243 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0081s with status code 200
+2024-09-10 20:50:48,431 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0192s with status code 200
+2024-09-10 20:50:48,432 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0207s with status code 200
+2024-09-10 20:51:06,147 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0039s with status code 200
+2024-09-10 20:51:10,449 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0160s with status code 200
+2024-09-10 20:51:11,472 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0116s with status code 200
+2024-09-10 20:51:11,473 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0117s with status code 200
+2024-09-10 20:51:12,605 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0070s with status code 200
+2024-09-10 20:51:12,606 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0073s with status code 200
+2024-09-10 20:52:03,416 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0022s with status code 200
+2024-09-10 20:52:07,843 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0152s with status code 200
+2024-09-10 20:52:08,866 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0102s with status code 200
+2024-09-10 20:52:08,867 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0113s with status code 200
+2024-09-10 20:52:11,093 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
+2024-09-10 20:52:11,094 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
+2024-09-10 20:52:14,378 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0008s with status code 200
+2024-09-10 20:52:50,488 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0176s with status code 200
+2024-09-10 20:52:51,526 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0138s with status code 200
+2024-09-10 20:52:51,526 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0134s with status code 200
+2024-09-10 20:52:54,702 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0007s with status code 200
+2024-09-10 20:53:42,762 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0458s with status code 200
+2024-09-10 20:53:43,794 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0187s with status code 200
+2024-09-10 20:53:43,795 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0182s with status code 200
+2024-09-10 20:53:45,088 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0071s with status code 200
+2024-09-10 20:53:45,088 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0074s with status code 200
+2024-09-10 20:53:47,666 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/logout completed in 0.0007s with status code 200
+2024-09-10 20:54:00,156 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0180s with status code 200
+2024-09-10 20:54:01,187 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0172s with status code 200
+2024-09-10 20:54:01,187 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0191s with status code 200
+2024-09-10 20:54:54,793 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0178s with status code 400
+2024-09-10 20:55:00,429 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0074s with status code 200
+2024-09-10 20:55:01,467 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0056s with status code 200
+2024-09-10 20:55:01,468 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
+2024-09-10 20:55:07,486 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0056s with status code 200
+2024-09-10 20:55:08,505 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0078s with status code 200
+2024-09-10 20:55:08,506 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0071s with status code 200
+2024-09-10 20:55:53,857 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0491s with status code 201
+2024-09-10 20:56:48,052 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0324s with status code 201
+2024-09-10 20:58:50,573 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0220s with status code 200
+2024-09-10 20:58:51,653 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0062s with status code 200
+2024-09-10 20:58:51,653 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0068s with status code 200
+2024-09-10 20:58:54,316 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0072s with status code 200
+2024-09-10 20:58:54,316 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0080s with status code 200
+2024-09-10 20:58:55,958 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0057s with status code 200
+2024-09-10 20:58:55,958 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/verify completed in 0.0064s with status code 200
+2024-09-10 21:46:12,836 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:46:13,330 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:46:13,689 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 21:46:20,126 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:46:20,771 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 21:46:21,412 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:46:21,945 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 21:46:25,338 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:46:25,865 - watchfiles.main - INFO - 3 changes detected
+2024-09-10 21:46:49,944 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:47:01,018 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:47:55,223 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:48:02,041 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:48:15,430 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:50:42,264 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:50:49,375 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:51:08,068 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:51:08,632 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:51:54,777 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:05,878 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:14,386 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:19,083 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:20,594 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:32,391 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:38,564 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:52:43,190 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:54:53,025 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:55:07,346 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:55:12,579 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:14,743 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:15,480 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:21,218 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:43,972 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:54,148 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:56:56,541 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:57:01,586 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:57:15,219 - watchfiles.main - INFO - 2 changes detected
+2024-09-10 21:58:00,953 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:58:10,598 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:58:12,467 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:58:21,535 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:58:22,873 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:58:43,494 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:59:19,557 - watchfiles.main - INFO - 1 change detected
+2024-09-10 21:59:57,680 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:00:46,845 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:01:13,016 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:02:24,056 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:02:29,231 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:02:50,898 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:02:53,394 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:02:55,062 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:03:58,387 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:04:06,259 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:04:48,084 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:06:44,364 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:07:32,503 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:08:06,499 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:09:23,519 - watchfiles.main - INFO - 2 changes detected
+2024-09-10 22:09:24,514 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:09:26,967 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:12:21,299 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:12:22,276 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:12:28,429 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:13:46,908 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:13:57,518 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:14:10,364 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:14:42,602 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:14:45,689 - watchfiles.main - INFO - 1 change detected
+2024-09-10 22:14:46,472 - watchfiles.main - INFO - 3 changes detected
