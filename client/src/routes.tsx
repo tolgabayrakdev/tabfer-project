@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Contact from './pages/dashboard/Contact';
 
 const HomePage = lazy(() => import('./pages/Home'));
 const SignInPage = lazy(() => import('./pages/SignIn'));
@@ -9,7 +10,8 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
-
+const DashboardContactPage = lazy(() => import('./pages/dashboard/Contact'));
+const DashboardDealPage = lazy(() => import('./pages/dashboard/Deal'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -37,6 +39,9 @@ const routes = createBrowserRouter([
         children: [
             { path: "", element: <DashboardIndexPage />, index: true },
             { path: "profile", element: <DashboardProfilePage /> },
+            { path: "contacts", element: <DashboardContactPage /> },
+            { path: "contacts", element: <Contact /> }, 
+            { path: "deals", element: <DashboardDealPage /> },
         ]
     }
 ]);
