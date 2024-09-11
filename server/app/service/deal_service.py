@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from ..model import Deal
 from app.schema.deal_schema import DealCreate, DealUpdate, DealShow
-from typing import List
+from typing import List, Any
 from fastapi import HTTPException, status
 
 
@@ -45,7 +45,7 @@ class DealService:
             )
 
     @staticmethod
-    def get_all(db: Session) -> List[Deal]:
+    def get_all(db: Session) -> List[Any]:
         try:
             return db.query(Deal).all()
         except SQLAlchemyError as e:

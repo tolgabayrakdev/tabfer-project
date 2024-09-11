@@ -20,7 +20,7 @@ class User(Base):
     password = Column(String)
     role_id = Column(Integer, ForeignKey("roles.id"), default=1)
     created_at = Column(DateTime, default=datetime.now())
-    role = relationship("Role")
+
 
     
 class Contact(Base):
@@ -35,10 +35,6 @@ class Contact(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
 
-    user = relationship("User", back_populates="contacts")
-    deals = relationship("Deal", back_populates="contact")
-    tickets = relationship("Ticket", back_populates="contact")
-
 class Deal(Base):
     __tablename__ = "deals"
 
@@ -50,7 +46,6 @@ class Deal(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
 
-    contact = relationship("Contact", back_populates="deals")
 
 class Ticket(Base):
     __tablename__ = "tickets"
@@ -63,4 +58,3 @@ class Ticket(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
 
-    contact = relationship("Contact", back_populates="tickets")

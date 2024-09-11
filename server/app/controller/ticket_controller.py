@@ -3,7 +3,6 @@ from app.schema.ticket_schema import TicketCreate, TicketUpdate, TicketShow
 from sqlalchemy.orm import Session
 from app.service.ticket_service import TicketService
 from ..database import get_db
-from typing import List
 
 router = APIRouter()
 
@@ -15,7 +14,7 @@ def create_ticket(ticket: TicketCreate, db: Session = Depends(get_db)):
 def get_ticket(ticket_id: int, db: Session = Depends(get_db)):
     return TicketService.get_by_id(db, ticket_id)
 
-@router.get("/", response_model=List[TicketShow])
+@router.get("/")
 def get_all_tickets(db: Session = Depends(get_db)):
     return TicketService.get_all(db)
 

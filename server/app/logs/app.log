@@ -756,3 +756,282 @@
 2024-09-10 22:14:42,602 - watchfiles.main - INFO - 1 change detected
 2024-09-10 22:14:45,689 - watchfiles.main - INFO - 1 change detected
 2024-09-10 22:14:46,472 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:49:46,914 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0166s with status code 500
+2024-09-11 09:49:48,866 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0021s with status code 500
+2024-09-11 09:50:19,329 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0040s with status code 500
+2024-09-11 09:50:19,939 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0028s with status code 500
+2024-09-11 09:50:21,083 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0021s with status code 500
+2024-09-11 09:50:38,167 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:50:38,670 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:50:39,035 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:50:48,549 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:50:49,222 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:50:51,422 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0070s with status code 500
+2024-09-11 09:51:39,756 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:51:40,286 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:51:40,652 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:51:42,523 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0052s with status code 500
+2024-09-11 09:52:02,214 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:52:02,732 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:52:03,096 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:52:51,179 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:53:08,849 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:53:09,426 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:53:10,895 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0068s with status code 500
+2024-09-11 09:53:11,400 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0040s with status code 500
+2024-09-11 09:53:11,533 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0020s with status code 500
+2024-09-11 09:53:11,671 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0025s with status code 500
+2024-09-11 09:53:11,820 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0023s with status code 500
+2024-09-11 09:54:33,162 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:54:33,681 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:54:34,043 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:54:43,114 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0072s with status code 500
+2024-09-11 09:57:13,786 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:57:14,288 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:57:14,646 - watchfiles.main - INFO - 4 changes detected
+2024-09-11 09:57:15,336 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:57:15,970 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:57:16,540 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:57:59,164 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:57:59,797 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:58:04,238 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:58:04,943 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:58:17,570 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:58:18,394 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:58:26,407 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0075s with status code 500
+2024-09-11 09:58:27,345 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0024s with status code 500
+2024-09-11 09:58:27,803 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0086s with status code 500
+2024-09-11 09:58:34,728 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:58:35,238 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:58:35,602 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 09:59:52,635 - watchfiles.main - INFO - 1 change detected
+2024-09-11 09:59:53,533 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:00:41,464 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:00:42,265 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:00:48,456 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:00:49,283 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:01:11,385 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0082s with status code 500
+2024-09-11 10:01:11,932 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0029s with status code 500
+2024-09-11 10:01:12,122 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0026s with status code 500
+2024-09-11 10:01:12,655 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0024s with status code 500
+2024-09-11 10:01:14,965 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:01:15,466 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:01:15,824 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:01:28,618 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:01:29,444 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:01:33,074 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0058s with status code 500
+2024-09-11 10:01:33,592 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0044s with status code 500
+2024-09-11 10:02:03,230 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:03,789 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:04,149 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:06,019 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0033s with status code 500
+2024-09-11 10:02:06,459 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0029s with status code 500
+2024-09-11 10:02:06,578 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0033s with status code 500
+2024-09-11 10:02:06,753 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0034s with status code 500
+2024-09-11 10:02:18,270 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:18,753 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:19,119 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:20,322 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0043s with status code 500
+2024-09-11 10:02:22,633 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0055s with status code 500
+2024-09-11 10:02:25,712 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:26,275 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:26,637 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:30,349 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:31,026 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:33,337 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0064s with status code 500
+2024-09-11 10:02:37,752 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:38,315 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:38,674 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:49,555 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:50,329 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:02:51,279 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0039s with status code 500
+2024-09-11 10:02:52,719 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0054s with status code 500
+2024-09-11 10:02:55,636 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:56,193 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:02:56,555 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:03:14,978 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:03:15,732 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:03:16,643 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0043s with status code 500
+2024-09-11 10:03:21,752 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:03:22,294 - watchfiles.main - INFO - 4 changes detected
+2024-09-11 10:03:44,139 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:03:44,828 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:03:46,527 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0043s with status code 500
+2024-09-11 10:04:18,687 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:19,251 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:19,614 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:04:21,217 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:21,893 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:04:23,870 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:24,520 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:04:43,165 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0152s with status code 500
+2024-09-11 10:04:44,661 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:45,201 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:04:45,559 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:05:04,952 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/register completed in 0.0226s with status code 201
+2024-09-11 10:05:09,573 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0063s with status code 200
+2024-09-11 10:05:27,398 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:05:27,969 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:05:28,331 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:05:33,005 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:05:33,588 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:05:39,999 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:05:40,615 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:06:06,306 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:06:06,970 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:06:07,335 - watchfiles.main - INFO - 9 changes detected
+2024-09-11 10:06:08,227 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:06:08,839 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:06:17,455 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:06:17,996 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:06:46,924 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:06:47,855 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:06:49,723 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:06:50,455 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:07:57,147 - app.middleware.logging_middleware - INFO - POST /api/v1/contacts completed in 0.0007s with status code 404
+2024-09-11 10:08:03,322 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:08:03,891 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:08:04,253 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:08:12,090 - app.middleware.logging_middleware - INFO - POST /api/v1/contact completed in 0.0008s with status code 307
+2024-09-11 10:08:12,101 - app.middleware.logging_middleware - INFO - POST /api/v1/contact/ completed in 0.0098s with status code 422
+2024-09-11 10:08:21,679 - app.middleware.logging_middleware - INFO - POST /api/v1/contact completed in 0.0008s with status code 307
+2024-09-11 10:08:21,688 - app.middleware.logging_middleware - INFO - POST /api/v1/contact/ completed in 0.0077s with status code 422
+2024-09-11 10:08:22,634 - app.middleware.logging_middleware - INFO - POST /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:08:22,641 - app.middleware.logging_middleware - INFO - POST /api/v1/contact/ completed in 0.0065s with status code 422
+2024-09-11 10:08:54,108 - app.middleware.logging_middleware - INFO - POST /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:08:54,127 - app.middleware.logging_middleware - INFO - POST /api/v1/contact/ completed in 0.0184s with status code 201
+2024-09-11 10:09:15,215 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0006s with status code 307
+2024-09-11 10:10:13,003 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:10:13,540 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:10:13,901 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:10:15,829 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:10:34,428 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:10:34,963 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:10:35,328 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:10:43,929 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:10:44,699 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:10:45,986 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0004s with status code 307
+2024-09-11 10:13:17,065 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:17,638 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:18,056 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:13:18,734 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:19,459 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:13:21,581 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:13:31,033 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:31,512 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:31,868 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:13:33,828 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:13:34,331 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0015s with status code 307
+2024-09-11 10:13:51,356 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:51,863 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:52,226 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:13:59,072 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:13:59,777 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:14:06,957 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:14:07,680 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:14:09,596 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:14:09,609 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0119s with status code 200
+2024-09-11 10:14:23,032 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:14:23,574 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:14:23,933 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:14:38,132 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:14:39,029 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:14:57,258 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:14:58,149 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:15:14,656 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:15:15,470 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:15:17,081 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:15:17,756 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:15:27,578 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:15:28,390 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:15:47,610 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:15:48,456 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:15:49,366 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:15:50,115 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:08,865 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:25:09,750 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:38,166 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:25:39,038 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:40,856 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:25:41,527 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:47,436 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:25:47,964 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:49,071 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:25:49,751 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:25:59,269 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:26:00,048 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:26:05,812 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:26:05,814 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0012s with status code 401
+2024-09-11 10:26:35,571 - app.middleware.logging_middleware - INFO - GET /api/v1/authentication/login completed in 0.0008s with status code 405
+2024-09-11 10:26:38,304 - app.middleware.logging_middleware - INFO - POST /api/v1/authentication/login completed in 0.0182s with status code 200
+2024-09-11 10:26:46,964 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0006s with status code 307
+2024-09-11 10:26:46,977 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0119s with status code 200
+2024-09-11 10:26:59,464 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/1 completed in 0.0105s with status code 200
+2024-09-11 10:27:20,451 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:27:20,995 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:27:21,358 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:27:22,905 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:27:23,603 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:27:38,799 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:27:39,470 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:27:45,123 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:27:45,816 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:27:47,393 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:27:48,489 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:28:02,938 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:03,430 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:03,787 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:28:06,148 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:06,912 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:28:07,768 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:28:08,280 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0012s with status code 307
+2024-09-11 10:28:44,701 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:45,217 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:45,583 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:28:46,701 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:28:46,711 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0092s with status code 200
+2024-09-11 10:28:47,248 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:28:47,257 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0084s with status code 200
+2024-09-11 10:28:57,924 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:58,494 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:28:58,860 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:29:04,499 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:29:04,512 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0117s with status code 200
+2024-09-11 10:29:06,099 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:29:06,107 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0072s with status code 200
+2024-09-11 10:29:06,415 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0004s with status code 307
+2024-09-11 10:29:06,422 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0063s with status code 200
+2024-09-11 10:29:06,571 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0004s with status code 307
+2024-09-11 10:29:06,580 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0081s with status code 200
+2024-09-11 10:29:06,739 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0007s with status code 307
+2024-09-11 10:29:06,747 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0064s with status code 200
+2024-09-11 10:29:06,904 - app.middleware.logging_middleware - INFO - GET /api/v1/contact completed in 0.0005s with status code 307
+2024-09-11 10:29:06,927 - app.middleware.logging_middleware - INFO - GET /api/v1/contact/ completed in 0.0194s with status code 200
+2024-09-11 10:29:08,867 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:29:09,418 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:29:09,782 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:30:43,652 - app.middleware.logging_middleware - INFO - POST /api/v1/deal completed in 0.0007s with status code 307
+2024-09-11 10:30:43,675 - app.middleware.logging_middleware - INFO - POST /api/v1/deal/ completed in 0.0215s with status code 201
+2024-09-11 10:30:51,748 - app.middleware.logging_middleware - INFO - GET /api/v1/deal completed in 0.0005s with status code 307
+2024-09-11 10:30:51,753 - app.middleware.logging_middleware - INFO - GET /api/v1/deal/ completed in 0.0044s with status code 200
+2024-09-11 10:31:00,675 - app.middleware.logging_middleware - INFO - POST /api/v1/deal completed in 0.0007s with status code 307
+2024-09-11 10:31:00,687 - app.middleware.logging_middleware - INFO - POST /api/v1/deal/ completed in 0.0112s with status code 201
+2024-09-11 10:31:04,392 - app.middleware.logging_middleware - INFO - GET /api/v1/deal completed in 0.0004s with status code 307
+2024-09-11 10:31:04,398 - app.middleware.logging_middleware - INFO - GET /api/v1/deal/ completed in 0.0050s with status code 200
+2024-09-11 10:31:10,224 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:10,746 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:11,106 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:22,991 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:23,792 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:26,420 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:27,141 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:34,552 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:35,281 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:37,022 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:37,699 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:40,267 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:40,916 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:43,100 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:43,882 - watchfiles.main - INFO - 3 changes detected
+2024-09-11 10:31:44,625 - watchfiles.main - INFO - 1 change detected
+2024-09-11 10:31:45,363 - watchfiles.main - INFO - 3 changes detected

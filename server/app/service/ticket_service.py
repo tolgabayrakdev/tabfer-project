@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from ..model import Ticket
 from app.schema.ticket_schema import TicketCreate, TicketUpdate, TicketShow
-from typing import List
+from typing import List, Any
 from fastapi import HTTPException, status
 
 
@@ -45,7 +45,7 @@ class TicketService:
             )
 
     @staticmethod
-    def get_all(db: Session) -> List[Ticket]:
+    def get_all(db: Session) -> List[Any]:
         try:
             return db.query(Ticket).all()
         except SQLAlchemyError as e:

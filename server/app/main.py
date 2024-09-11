@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .controller import authentication_controller, user_controller, deal_controller, ticket_controller
+from .controller import (
+    authentication_controller,
+    user_controller,
+    deal_controller,
+    ticket_controller,
+    contact_controller,
+)
 
 from .database import engine
 from . import model
@@ -28,6 +34,8 @@ app.include_router(
 app.include_router(router=user_controller.router, prefix="/api/v1/user")
 app.include_router(router=deal_controller.router, prefix="/api/v1/deal")
 app.include_router(router=ticket_controller.router, prefix="/api/v1/ticket")
+app.include_router(router=contact_controller.router, prefix="/api/v1/contact")
+
 
 @app.get("/")
 def read_root():

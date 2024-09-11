@@ -7,7 +7,7 @@ from app.schema.contact_schema import (
     ContactList,
     ContactUpdate,
 )
-from typing import List
+from typing import List, Any
 from fastapi import HTTPException, status
 
 
@@ -35,7 +35,7 @@ class ContactService:
             )
 
     @staticmethod
-    def get_all(db: Session, user_id: int) -> List[Contact]:
+    def get_all(db: Session, user_id: int) -> List[Any]:
         try:
             return db.query(Contact).filter(Contact.user_id == user_id).all()
         except SQLAlchemyError as e:
