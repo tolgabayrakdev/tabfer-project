@@ -3,7 +3,7 @@ import {
   Box, Button, Input, Grid, GridItem,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
   FormControl, FormLabel, Select, useDisclosure, VStack, HStack, useToast,
-  Text, Spinner, Badge, Textarea, Flex
+  Text, Spinner, Badge, Textarea, Flex, useColorModeValue
 } from '@chakra-ui/react';
 import { AddIcon, EditIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
@@ -18,6 +18,7 @@ type Ticket = {
   subject: string;
   description: string;
   status: 'open' | 'closed';
+  createdAt: string;
 };
 
 export default function Ticket() {
@@ -48,6 +49,7 @@ export default function Ticket() {
       subject: `Ticket Subject ${index + 1}`,
       description: `Description for ticket ${index + 1}`,
       status: Math.random() > 0.5 ? 'open' : 'closed',
+      createdAt: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString(),
     }));
     const startIndex = (page - 1) * ticketsPerPage;
     const paginatedTickets = sampleTickets.slice(startIndex, startIndex + ticketsPerPage);
@@ -101,6 +103,7 @@ export default function Ticket() {
       subject: formData.get('subject') as string,
       description: formData.get('description') as string,
       status: formData.get('status') as 'open' | 'closed',
+      createdAt: editingTicket?.createdAt || new Date().toISOString(),
     };
 
     if (editingTicket) {
@@ -135,6 +138,15 @@ export default function Ticket() {
     return status === 'open' ? 'green' : 'red';
   };
 
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString('tr-TR', options);
+  };
+
+  // Renk moduna göre arka plan ve metin rengini ayarlayalım
+  const bgColor = useColorModeValue('white', 'gray.700');
+  const textColor = useColorModeValue('gray.800', 'white');
+
   return (
     <Box>
       <HStack justifyContent="space-between" mb={4}>
@@ -166,7 +178,7 @@ export default function Ticket() {
         <>
           <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
             {filteredTickets.map((ticket) => (
-              <GridItem key={ticket.id} bg="white" p={5} shadow="md" borderWidth="1px" borderRadius="lg">
+              <GridItem key={ticket.id} bg={bgColor} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
                 <VStack align="stretch" spacing={3}>
                   <Flex justify="space-between" align="center">
                     <Badge colorScheme={getStatusColor(ticket.status)}>
@@ -174,9 +186,10 @@ export default function Ticket() {
                     </Badge>
                     <Text fontSize="sm" color="gray.500">ID: {ticket.id}</Text>
                   </Flex>
-                  <Text fontWeight="bold" fontSize="lg">{ticket.subject}</Text>
-                  <Text fontSize="sm" noOfLines={2}>{ticket.description}</Text>
-                  <Text fontSize="sm">İlgili Kişi: {contacts.find(c => c.id === ticket.assigneeId)?.name || 'Bilinmiyor'}</Text>
+                  <Text fontWeight="bold" fontSize="lg" color={textColor}>{ticket.subject}</Text>
+                  <Text fontSize="sm" noOfLines={2} color={textColor}>{ticket.description}</Text>
+                  <Text fontSize="sm" color={textColor}>İlgili Kişi: {contacts.find(c => c.id === ticket.assigneeId)?.name || 'Bilinmiyor'}</Text>
+                  <Text fontSize="sm" color="gray.500">Oluşturma Tarihi: {formatDate(ticket.createdAt)}</Text>
                   <HStack>
                     <Button size="sm" leftIcon={<EditIcon />} onClick={() => handleEdit(ticket)}>
                       Düzenle
@@ -212,31 +225,31 @@ export default function Ticket() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={bgColor}>
           <form onSubmit={handleSubmit}>
-            <ModalHeader>{editingTicket ? 'Ticket Düzenle' : 'Yeni Ticket Ekle'}</ModalHeader>
+            <ModalHeader color={textColor}>{editingTicket ? 'Ticket Düzenle' : 'Yeni Ticket Ekle'}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <VStack spacing={4}>
                 <FormControl isRequired>
-                  <FormLabel>İlgili Kişi</FormLabel>
-                  <Select name="assigneeId" defaultValue={editingTicket?.assigneeId}>
+                  <FormLabel color={textColor}>İlgili Kişi</FormLabel>
+                  <Select name="assigneeId" defaultValue={editingTicket?.assigneeId} bg={bgColor} color={textColor}>
                     {contacts.map(contact => (
                       <option key={contact.id} value={contact.id}>{contact.name}</option>
                     ))}
                   </Select>
                 </FormControl>
                 <FormControl isRequired>
-                  <FormLabel>Konu</FormLabel>
-                  <Input name="subject" defaultValue={editingTicket?.subject} />
+                  <FormLabel color={textColor}>Konu</FormLabel>
+                  <Input name="subject" defaultValue={editingTicket?.subject} bg={bgColor} color={textColor} />
                 </FormControl>
                 <FormControl isRequired>
-                  <FormLabel>Açıklama</FormLabel>
-                  <Textarea name="description" defaultValue={editingTicket?.description} />
+                  <FormLabel color={textColor}>Açıklama</FormLabel>
+                  <Textarea name="description" defaultValue={editingTicket?.description} bg={bgColor} color={textColor} />
                 </FormControl>
                 <FormControl isRequired>
-                  <FormLabel>Durum</FormLabel>
-                  <Select name="status" defaultValue={editingTicket?.status || 'open'}>
+                  <FormLabel color={textColor}>Durum</FormLabel>
+                  <Select name="status" defaultValue={editingTicket?.status || 'open'} bg={bgColor} color={textColor}>
                     <option value="open">Açık</option>
                     <option value="closed">Kapalı</option>
                   </Select>
