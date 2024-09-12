@@ -18,5 +18,5 @@ Bu dashboard uygulaması, müşteri ilişkilerini ve iş süreçlerini yönetmek
 
 
 
-- Youtube Video
+> Youtube Video
 [YouTube Video Linki](https://youtu.be/oXx5XxfPZYI?si=ub_E0frsrZ8VkJJ3)
