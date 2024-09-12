@@ -57,7 +57,12 @@ class DealService:
     @staticmethod
     def update(db: Session, deal_id: int, data: DealUpdate) -> Deal:
         try:
-            deal = DealService.get_by_id(db, deal_id)
+            deal = db.query(Deal).filter(Deal.id == deal_id).first()
+            if not deal:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Deal with id {deal_id} not found",
+                )
             for key, value in data.model_dump(exclude_unset=True).items():
                 setattr(deal, key, value)
             db.commit()
@@ -73,7 +78,12 @@ class DealService:
     @staticmethod
     def delete(db: Session, deal_id: int) -> None:
         try:
-            deal = DealService.get_by_id(db, deal_id)
+            deal = db.query(Deal).filter(Deal.id == deal_id).first()
+            if not deal:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Deal with id {deal_id} not found",
+                )
             db.delete(deal)
             db.commit()
         except SQLAlchemyError as e:

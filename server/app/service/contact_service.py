@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import SQLAlchemyError
-from ..model import Contact
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from ..model import Contact, Deal, Ticket  # Ticket'ı import etmeyi unutmayın
 from app.schema.contact_schema import (
     ContactCreate,
     ContactShow,
@@ -56,7 +56,12 @@ class ContactService:
 
     @staticmethod
     def update(db: Session, contact_id: int, data: ContactUpdate, user_id: int) -> Contact:
-        contact = ContactService.get_by_id(db, contact_id, user_id)
+        contact = db.query(Contact).filter(Contact.id == contact_id, Contact.user_id == user_id).first()
+        if not contact:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Contact with id {contact_id} not found",
+            )
         for key, value in data.model_dump(exclude_unset=True).items():
             setattr(contact, key, value)
         try:
@@ -72,13 +77,26 @@ class ContactService:
 
     @staticmethod
     def delete(db: Session, contact_id: int, user_id: int) -> None:
-        contact = ContactService.get_by_id(db, contact_id, user_id)
+        contact = db.query(Contact).filter(Contact.id == contact_id, Contact.user_id == user_id).first()
+        if not contact:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Contact with id {contact_id} not found",
+            )
+        
         try:
+            # İlişkili deal'ları sil
+            db.query(Deal).filter(Deal.contact_id == contact_id).delete()
+            
+            # İlişkili ticket'ları sil
+            db.query(Ticket).filter(Ticket.contact_id == contact_id).delete()
+            
+            # Kişiyi sil
             db.delete(contact)
             db.commit()
         except SQLAlchemyError as e:
             db.rollback()
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"An error occurred while deleting the contact: {str(e)}",
+                detail=f"An error occurred while deleting the contact and related records: {str(e)}",
             )

@@ -57,7 +57,12 @@ class TicketService:
     @staticmethod
     def update(db: Session, ticket_id: int, data: TicketUpdate) -> Ticket:
         try:
-            ticket = TicketService.get_by_id(db, ticket_id)
+            ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+            if not ticket:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Ticket with id {ticket_id} not found",
+                )
             for key, value in data.model_dump(exclude_unset=True).items():
                 setattr(ticket, key, value)
             db.commit()
@@ -73,7 +78,12 @@ class TicketService:
     @staticmethod
     def delete(db: Session, ticket_id: int) -> None:
         try:
-            ticket = TicketService.get_by_id(db, ticket_id)
+            ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+            if not ticket:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Ticket with id {ticket_id} not found",
+                )
             db.delete(ticket)
             db.commit()
         except SQLAlchemyError as e:
