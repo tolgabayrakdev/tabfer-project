@@ -7,10 +7,12 @@ import {
   AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay
 } from '@chakra-ui/react';
 import { AddIcon, EditIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Helmet } from 'react-helmet-async';
 
 type Contact = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
 };
 
 type Ticket = {
@@ -166,7 +168,7 @@ export default function Ticket() {
         duration: 2000,
         isClosable: true,
       });
-      
+
       onClose();
     } catch (error) {
       console.error('Error:', error);
@@ -180,7 +182,7 @@ export default function Ticket() {
     }
   };
 
-  const filteredTickets = tickets.filter(ticket => 
+  const filteredTickets = tickets.filter(ticket =>
     statusFilter === 'all' ? true : ticket.status === statusFilter
   );
 
@@ -204,144 +206,150 @@ export default function Ticket() {
   const textColor = useColorModeValue('gray.800', 'white');
 
   return (
-    <Box>
-      <HStack justifyContent="space-between" mb={4}>
-        <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
-          Yeni Ticket Ekle
-        </Button>
-        <Select 
-          w="200px" 
-          value={statusFilter} 
-          onChange={(e) => setStatusFilter(e.target.value as 'all' | 'open' | 'closed')}
-        >
-          <option value="all">Tümü</option>
-          <option value="open">Açık</option>
-          <option value="closed">Kapalı</option>
-        </Select>
-      </HStack>
+    <>
+      <Helmet>
+        <title>Tickets - Dashboard</title>
+      </Helmet>
+      <Box>
+        <HStack justifyContent="space-between" mb={4}>
+          <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
+            Yeni Ticket Ekle
+          </Button>
+          <Select
+            w="200px"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value as 'all' | 'open' | 'closed')}
+          >
+            <option value="all">Tümü</option>
+            <option value="open">Açık</option>
+            <option value="closed">Kapalı</option>
+          </Select>
+        </HStack>
 
-      {isLoading || isContactsLoading ? (
-        <Flex justify="center" align="center" minHeight="300px">
-          <Spinner size="xl" />
-        </Flex>
-      ) : (
-        <>
-          <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
-            {currentTickets.map((ticket) => (
-              <GridItem key={ticket.id} bg={bgColor} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
-                <VStack align="stretch" spacing={3}>
-                  <Flex justify="space-between" align="center">
-                    <Badge colorScheme={getStatusColor(ticket.status)}>
-                      {ticket.status === 'open' ? 'Açık' : 'Kapalı'}
-                    </Badge>
-                    <Text fontSize="sm" color="gray.500">ID: {ticket.id}</Text>
-                  </Flex>
-                  <Text fontWeight="bold" fontSize="lg" color={textColor}>{ticket.subject}</Text>
-                  <Text fontSize="sm" noOfLines={2} color={textColor}>{ticket.description}</Text>
-                  <Text fontSize="sm" color={textColor}>İlgili Kişi: {contacts.find(c => c.id === ticket.contact_id)?.name || 'Bilinmiyor'}</Text>
-                  <Text fontSize="sm" color="gray.500">Oluşturma Tarihi: {formatDate(ticket.created_at)}</Text>
-                  <HStack>
-                    <Button size="sm" leftIcon={<EditIcon />} onClick={() => handleEdit(ticket)}>
-                      Düzenle
-                    </Button>
-                    <Button size="sm" colorScheme="red" leftIcon={<DeleteIcon />} onClick={() => handleDelete(ticket.id)}>
-                      Sil
-                    </Button>
-                  </HStack>
+        {isLoading || isContactsLoading ? (
+          <Flex justify="center" align="center" minHeight="300px">
+            <Spinner size="xl" />
+          </Flex>
+        ) : (
+          <>
+            <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
+              {currentTickets.map((ticket) => (
+                <GridItem key={ticket.id} bg={bgColor} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
+                  <VStack align="stretch" spacing={3}>
+                    <Flex justify="space-between" align="center">
+                      <Badge colorScheme={getStatusColor(ticket.status)}>
+                        {ticket.status === 'open' ? 'Açık' : 'Kapalı'}
+                      </Badge>
+                      <Text fontSize="sm" color="gray.500">ID: {ticket.id}</Text>
+                    </Flex>
+                    <Text fontWeight="bold" fontSize="lg" color={textColor}>{ticket.subject}</Text>
+                    <Text fontSize="sm" noOfLines={2} color={textColor}>{ticket.description}</Text>
+                    <Text fontSize="sm" color={textColor}>İlgili Kişi: {contacts.find(c => c.id === ticket.contact_id)?.first_name + ' ' + contacts.find(c => c.id === ticket.contact_id)?.last_name || 'Bilinmiyor'}</Text>
+                    <Text fontSize="sm" color="gray.500">Oluşturma Tarihi: {formatDate(ticket.created_at)}</Text>
+                    <HStack>
+                      <Button size="sm" leftIcon={<EditIcon />} onClick={() => handleEdit(ticket)}>
+                        Düzenle
+                      </Button>
+                      <Button size="sm" colorScheme="red" leftIcon={<DeleteIcon />} onClick={() => handleDelete(ticket.id)}>
+                        Sil
+                      </Button>
+                    </HStack>
+                  </VStack>
+                </GridItem>
+              ))}
+            </Grid>
+
+            <HStack justifyContent="center" mt={6}>
+              <Button
+                onClick={() => paginate(currentPage - 1)}
+                isDisabled={currentPage === 1}
+                leftIcon={<ChevronLeftIcon />}
+              >
+                Önceki
+              </Button>
+              <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
+              <Button
+                onClick={() => paginate(currentPage + 1)}
+                isDisabled={currentPage === totalPages}
+                rightIcon={<ChevronRightIcon />}
+              >
+                Sonraki
+              </Button>
+            </HStack>
+          </>
+        )}
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg={bgColor}>
+            <form onSubmit={handleSubmit}>
+              <ModalHeader color={textColor}>{editingTicket ? 'Ticket Düzenle' : 'Yeni Ticket Ekle'}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <VStack spacing={4}>
+                  <FormControl isRequired>
+                    <FormLabel color={textColor}>İlgili Kişi</FormLabel>
+                    <Select name="contact_id" defaultValue={editingTicket?.contact_id} bg={bgColor} color={textColor}>
+                      {contacts.map(contact => (
+                        <option key={contact.id} value={contact.id}>{contact.first_name} {contact.last_name}</option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel color={textColor}>Konu</FormLabel>
+                    <Input name="subject" defaultValue={editingTicket?.subject} bg={bgColor} color={textColor} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel color={textColor}>Açıklama</FormLabel>
+                    <Textarea name="description" defaultValue={editingTicket?.description} bg={bgColor} color={textColor} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel color={textColor}>Durum</FormLabel>
+                    <Select name="status" defaultValue={editingTicket?.status || 'open'} bg={bgColor} color={textColor}>
+                      <option value="open">Açık</option>
+                      <option value="closed">Kapalı</option>
+                    </Select>
+                  </FormControl>
                 </VStack>
-              </GridItem>
-            ))}
-          </Grid>
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="blue" mr={3} type="submit">
+                  Kaydet
+                </Button>
+                <Button onClick={onClose}>İptal</Button>
+              </ModalFooter>
+            </form>
+          </ModalContent>
+        </Modal>
 
-          <HStack justifyContent="center" mt={6}>
-            <Button
-              onClick={() => paginate(currentPage - 1)}
-              isDisabled={currentPage === 1}
-              leftIcon={<ChevronLeftIcon />}
-            >
-              Önceki
-            </Button>
-            <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
-            <Button
-              onClick={() => paginate(currentPage + 1)}
-              isDisabled={currentPage === totalPages}
-              rightIcon={<ChevronRightIcon />}
-            >
-              Sonraki
-            </Button>
-          </HStack>
-        </>
-      )}
+        <AlertDialog
+          isOpen={deleteAlert.isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={() => setDeleteAlert({ isOpen: false, ticketId: null })}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Ticket'ı Sil
+              </AlertDialogHeader>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent bg={bgColor}>
-          <form onSubmit={handleSubmit}>
-            <ModalHeader color={textColor}>{editingTicket ? 'Ticket Düzenle' : 'Yeni Ticket Ekle'}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <VStack spacing={4}>
-                <FormControl isRequired>
-                  <FormLabel color={textColor}>İlgili Kişi</FormLabel>
-                  <Select name="contact_id" defaultValue={editingTicket?.contact_id} bg={bgColor} color={textColor}>
-                    {contacts.map(contact => (
-                      <option key={contact.id} value={contact.id}>{contact.name}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel color={textColor}>Konu</FormLabel>
-                  <Input name="subject" defaultValue={editingTicket?.subject} bg={bgColor} color={textColor} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel color={textColor}>Açıklama</FormLabel>
-                  <Textarea name="description" defaultValue={editingTicket?.description} bg={bgColor} color={textColor} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel color={textColor}>Durum</FormLabel>
-                  <Select name="status" defaultValue={editingTicket?.status || 'open'} bg={bgColor} color={textColor}>
-                    <option value="open">Açık</option>
-                    <option value="closed">Kapalı</option>
-                  </Select>
-                </FormControl>
-              </VStack>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} type="submit">
-                Kaydet
-              </Button>
-              <Button onClick={onClose}>İptal</Button>
-            </ModalFooter>
-          </form>
-        </ModalContent>
-      </Modal>
+              <AlertDialogBody>
+                Bu işlem geri alınamaz. Bu ticket'ı silmek istediğinizden emin misiniz?
+              </AlertDialogBody>
 
-      <AlertDialog
-        isOpen={deleteAlert.isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={() => setDeleteAlert({ isOpen: false, ticketId: null })}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Ticket'ı Sil
-            </AlertDialogHeader>
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={() => setDeleteAlert({ isOpen: false, ticketId: null })}>
+                  İptal
+                </Button>
+                <Button colorScheme="red" onClick={confirmDelete} ml={3}>
+                  Sil
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      </Box>
+    </>
 
-            <AlertDialogBody>
-              Bu işlem geri alınamaz. Bu ticket'ı silmek istediğinizden emin misiniz?
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={() => setDeleteAlert({ isOpen: false, ticketId: null })}>
-                İptal
-              </Button>
-              <Button colorScheme="red" onClick={confirmDelete} ml={3}>
-                Sil
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </Box>
   );
 }

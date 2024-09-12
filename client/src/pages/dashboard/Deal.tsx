@@ -9,10 +9,12 @@ import {
 import { AddIcon, EditIcon, DeleteIcon, DownloadIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Helmet } from 'react-helmet-async';
 
 type Contact = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
 };
 
 type Deal = {
@@ -24,7 +26,6 @@ type Deal = {
 };
 
 export default function Deal() {
-  const [deals, setDeals] = useState<Deal[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [editingDeal, setEditingDeal] = useState<Deal | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('All');
@@ -68,7 +69,7 @@ export default function Deal() {
   }, [fetchDeals]);
 
   useEffect(() => {
-    const filtered = allDeals.filter(deal => 
+    const filtered = allDeals.filter(deal =>
       statusFilter === 'All' ? true : deal.status === statusFilter
     );
     setFilteredDeals(filtered);
@@ -192,7 +193,7 @@ export default function Deal() {
         duration: 2000,
         isClosable: true,
       });
-      
+
       onClose();
     } catch (error) {
       console.error('Error:', error);
@@ -216,7 +217,7 @@ export default function Deal() {
         deal.title,
         deal.amount,
         deal.status,
-        contacts.find(c => c.id === deal.contact_id)?.name || 'Bilinmiyor'
+        contacts.find(c => c.id === deal.contact_id)?.first_name + ' ' + contacts.find(c => c.id === deal.contact_id)?.last_name || 'Bilinmiyor'
       ];
       tableRows.push(dealData);
     });
@@ -227,7 +228,7 @@ export default function Deal() {
     });
 
     doc.save(`deals_${statusFilter.toLowerCase()}.pdf`);
-    
+
     toast({
       title: 'PDF başarıyla oluşturuldu',
       status: 'success',
@@ -250,161 +251,167 @@ export default function Deal() {
   };
 
   return (
-    <Box>
-      <HStack justifyContent="space-between" mb={4}>
-        <HStack>
-          <Button w="xs" leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
-            Yeni Deal Ekle
-          </Button>
-          <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-            <option value="All">Tüm Durumlar</option>
-            <option value="Open">Açık</option>
-            <option value="Closed">Kapalı</option>
-            <option value="Pending">Beklemede</option>
-          </Select>
-        </HStack>
-        <Button leftIcon={<DownloadIcon />} colorScheme="green" onClick={exportToPDF}>
-          PDF Olarak İndir
-        </Button>
-      </HStack>
-
-      {isLoading || isContactsLoading ? (
-        <Box textAlign="center" py={10}>
-          <Spinner size="xl" />
-          <Text mt={4}>Yükleniyor...</Text>
-        </Box>
-      ) : (
-        <>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Başlık</Th>
-                <Th>Miktar</Th>
-                <Th>Durum</Th>
-                <Th>İlgili Kişi</Th>
-                <Th>İşlemler</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {currentDeals.map((deal) => (
-                <Tr key={deal.id}>
-                  <Td>{deal.title}</Td>
-                  <Td>{deal.amount}₺</Td>
-                  <Td>
-                    <Badge colorScheme={getStatusColor(deal.status)}>
-                      {deal.status}
-                    </Badge>
-                  </Td>
-                  <Td>{contacts.find(c => c.id === deal.contact_id)?.name || 'Bilinmiyor'}</Td>
-                  <Td>
-                    <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(deal)}>
-                      Düzenle
-                    </Button>
-                    <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDelete(deal.id)}>
-                      Sil
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-
-          <HStack justifyContent="center" mt={4}>
-            <Button
-              onClick={() => paginate(currentPage - 1)}
-              isDisabled={currentPage === 1}
-              leftIcon={<ChevronLeftIcon />}
-            >
-              Önceki
+    <>
+      <Helmet>
+        <title>Deals - Dashboard</title>
+      </Helmet>
+      <Box>
+        <HStack justifyContent="space-between" mb={4}>
+          <HStack>
+            <Button w="xs" leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
+              Yeni Deal Ekle
             </Button>
-            <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
-            <Button
-              onClick={() => paginate(currentPage + 1)}
-              isDisabled={currentPage === totalPages}
-              rightIcon={<ChevronRightIcon />}
-            >
-              Sonraki
-            </Button>
+            <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <option value="All">Tüm Durumlar</option>
+              <option value="Open">Açık</option>
+              <option value="Closed">Kapalı</option>
+              <option value="Pending">Beklemede</option>
+            </Select>
           </HStack>
-        </>
-      )}
+          <Button leftIcon={<DownloadIcon />} colorScheme="green" onClick={exportToPDF}>
+            PDF Olarak İndir
+          </Button>
+        </HStack>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <form onSubmit={handleSubmit}>
-            <ModalHeader>{editingDeal ? 'Deal Düzenle' : 'Yeni Deal Ekle'}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <VStack spacing={4}>
-                <FormControl isRequired>
-                  <FormLabel>Başlık</FormLabel>
-                  <Input name="title" defaultValue={editingDeal?.title} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>Miktar</FormLabel>
-                  <NumberInput min={0} defaultValue={editingDeal?.amount || 0}>
-                    <NumberInputField name="amount" />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>Durum</FormLabel>
-                  <Select name="status" defaultValue={editingDeal?.status || 'Open'}>
-                    <option value="Open">Açık</option>
-                    <option value="Closed">Kapalı</option>
-                    <option value="Pending">Beklemede</option>
-                  </Select>
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>İlgili Kişi</FormLabel>
-                  <Select name="contactId" defaultValue={editingDeal?.contact_id}>
-                    {contacts.map(contact => (
-                      <option key={contact.id} value={contact.id}>{contact.name}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </VStack>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} type="submit">
-                Kaydet
+        {isLoading || isContactsLoading ? (
+          <Box textAlign="center" py={10}>
+            <Spinner size="xl" />
+            <Text mt={4}>Yükleniyor...</Text>
+          </Box>
+        ) : (
+          <>
+            <Table variant="simple">
+              <Thead>
+                <Tr>
+                  <Th>Başlık</Th>
+                  <Th>Miktar</Th>
+                  <Th>Durum</Th>
+                  <Th>İlgili Kişi</Th>
+                  <Th>İşlemler</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {currentDeals.map((deal) => (
+                  <Tr key={deal.id}>
+                    <Td>{deal.title}</Td>
+                    <Td>{deal.amount}₺</Td>
+                    <Td>
+                      <Badge colorScheme={getStatusColor(deal.status)}>
+                        {deal.status}
+                      </Badge>
+                    </Td>
+                    <Td>{contacts.find(c => c.id === deal.contact_id)?.first_name + ' ' + contacts.find(c => c.id === deal.contact_id)?.last_name || 'Bilinmiyor'}</Td>
+                    <Td>
+                      <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(deal)}>
+                        Düzenle
+                      </Button>
+                      <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDelete(deal.id)}>
+                        Sil
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+
+            <HStack justifyContent="center" mt={4}>
+              <Button
+                onClick={() => paginate(currentPage - 1)}
+                isDisabled={currentPage === 1}
+                leftIcon={<ChevronLeftIcon />}
+              >
+                Önceki
               </Button>
-              <Button onClick={onClose}>İptal</Button>
-            </ModalFooter>
-          </form>
-        </ModalContent>
-      </Modal>
-
-      <AlertDialog
-        isOpen={deleteAlert.isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={cancelDelete}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Deal'i Sil
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              Bu işlem geri alınamaz. Bu deal'i silmek istediğinizden emin misiniz?
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={cancelDelete}>
-                İptal
+              <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
+              <Button
+                onClick={() => paginate(currentPage + 1)}
+                isDisabled={currentPage === totalPages}
+                rightIcon={<ChevronRightIcon />}
+              >
+                Sonraki
               </Button>
-              <Button colorScheme="red" onClick={confirmDelete} ml={3}>
-                Sil
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </Box>
+            </HStack>
+          </>
+        )}
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <form onSubmit={handleSubmit}>
+              <ModalHeader>{editingDeal ? 'Deal Düzenle' : 'Yeni Deal Ekle'}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <VStack spacing={4}>
+                  <FormControl isRequired>
+                    <FormLabel>Başlık</FormLabel>
+                    <Input name="title" defaultValue={editingDeal?.title} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Miktar</FormLabel>
+                    <NumberInput min={0} defaultValue={editingDeal?.amount || 0}>
+                      <NumberInputField name="amount" />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Durum</FormLabel>
+                    <Select name="status" defaultValue={editingDeal?.status || 'Open'}>
+                      <option value="Open">Açık</option>
+                      <option value="Closed">Kapalı</option>
+                      <option value="Pending">Beklemede</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>İlgili Kişi</FormLabel>
+                    <Select name="contactId" defaultValue={editingDeal?.contact_id}>
+                      {contacts.map(contact => (
+                        <option key={contact.id} value={contact.id}>{contact.first_name} {contact.last_name}</option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </VStack>
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="blue" mr={3} type="submit">
+                  Kaydet
+                </Button>
+                <Button onClick={onClose}>İptal</Button>
+              </ModalFooter>
+            </form>
+          </ModalContent>
+        </Modal>
+
+        <AlertDialog
+          isOpen={deleteAlert.isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={cancelDelete}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Deal'i Sil
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                Bu işlem geri alınamaz. Bu deal'i silmek istediğinizden emin misiniz?
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={cancelDelete}>
+                  İptal
+                </Button>
+                <Button colorScheme="red" onClick={confirmDelete} ml={3}>
+                  Sil
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      </Box>
+    </>
+
   );
 }

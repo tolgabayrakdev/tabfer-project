@@ -21,6 +21,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
+import { Helmet } from 'react-helmet-async';
 
 ChartJS.register(
   CategoryScale,
@@ -35,7 +36,7 @@ ChartJS.register(
 
 type Props = {};
 
-export default function Index({}: Props) {
+export default function Index({ }: Props) {
   const [ticketStats, setTicketStats] = useState({ total: 0, thisMonth: 0 });
   const [dealStats, setDealStats] = useState({ total: 0, thisMonth: 0 });
   const [contactStats, setContactStats] = useState({ total: 0, thisMonth: 0 });
@@ -116,47 +117,55 @@ export default function Index({}: Props) {
   };
 
   return (
-    <Box p={5}>
-      <Heading as="h1" size="xl" mb={6}>
-        Dashboard
-      </Heading>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} mb={6}>
-        <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
-          <StatLabel color={textColor}>Toplam Ticket</StatLabel>
-          <StatNumber>{ticketStats.total}</StatNumber>
-          <StatHelpText>Bu ay: +{ticketStats.thisMonth}</StatHelpText>
-        </Stat>
-        <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
-          <StatLabel color={textColor}>Toplam Deal</StatLabel>
-          <StatNumber>{dealStats.total}</StatNumber>
-          <StatHelpText>Bu ay: +{dealStats.thisMonth}</StatHelpText>
-        </Stat>
-        <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
-          <StatLabel color={textColor}>Toplam Contact</StatLabel>
-          <StatNumber>{contactStats.total}</StatNumber>
-          <StatHelpText>Bu ay: +{contactStats.thisMonth}</StatHelpText>
-        </Stat>
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={6}>
-        <Box 
-          bg={bgColor} 
-          p={5} 
-          borderRadius="lg" 
-          boxShadow="md" 
-          height="400px"
-        >
-          <Line options={chartOptions} data={chartData} />
-        </Box>
-        <Box 
-          bg={bgColor} 
-          p={5} 
-          borderRadius="lg" 
-          boxShadow="md" 
-          height="400px"
-        >
-          <Pie options={pieChartOptions} data={pieChartData} />
-        </Box>
-      </SimpleGrid>
-    </Box>
+    <>
+      <Helmet>
+        <title>
+          Dashboard
+        </title>
+      </Helmet>
+      <Box p={5}>
+        <Heading as="h1" size="xl" mb={6}>
+          Dashboard
+        </Heading>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} mb={6}>
+          <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
+            <StatLabel color={textColor}>Toplam Ticket</StatLabel>
+            <StatNumber>{ticketStats.total}</StatNumber>
+            <StatHelpText>Bu ay: +{ticketStats.thisMonth}</StatHelpText>
+          </Stat>
+          <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
+            <StatLabel color={textColor}>Toplam Deal</StatLabel>
+            <StatNumber>{dealStats.total}</StatNumber>
+            <StatHelpText>Bu ay: +{dealStats.thisMonth}</StatHelpText>
+          </Stat>
+          <Stat bg={bgColor} p={5} borderRadius="lg" boxShadow="md">
+            <StatLabel color={textColor}>Toplam Contact</StatLabel>
+            <StatNumber>{contactStats.total}</StatNumber>
+            <StatHelpText>Bu ay: +{contactStats.thisMonth}</StatHelpText>
+          </Stat>
+        </SimpleGrid>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={6}>
+          <Box
+            bg={bgColor}
+            p={5}
+            borderRadius="lg"
+            boxShadow="md"
+            height="400px"
+          >
+            <Line options={chartOptions} data={chartData} />
+          </Box>
+          <Box
+            bg={bgColor}
+            p={5}
+            borderRadius="lg"
+            boxShadow="md"
+            height="400px"
+          >
+            <Pie options={pieChartOptions} data={pieChartData} />
+          </Box>
+        </SimpleGrid>
+      </Box>
+    </>
+
   );
 }

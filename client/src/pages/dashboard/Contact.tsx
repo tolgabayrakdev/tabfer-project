@@ -7,6 +7,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { AddIcon, EditIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Helmet } from 'react-helmet-async';
 
 type Contact = {
   id: string;
@@ -34,7 +35,7 @@ export default function Contact() {
 
   useEffect(() => {
     fetchContacts()
-  },[])
+  }, [])
 
   const fetchContacts = async () => {
     try {
@@ -44,7 +45,7 @@ export default function Contact() {
       });
       const data = await res.json();
       console.log(data);
-      
+
       if (res.status === 200) {
         setContacts(data);
       }
@@ -52,7 +53,7 @@ export default function Contact() {
       throw error;
     }
   };
-  
+
 
   const handleAdd = () => {
     setEditingContact(null);
@@ -196,129 +197,134 @@ export default function Contact() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <Box>
-      <VStack spacing={4} align="stretch">
-        <HStack justifyContent="space-between">
-          <Input
-            placeholder="Ara..."
-            onChange={(e) => setSearchText(e.target.value)}
-            width="300px"
-          />
-          <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
-            Kişi Ekle
-          </Button>
-        </HStack>
+    <>
+      <Helmet>
+        <title>Kisiler - Dashboard</title>
+      </Helmet>
+      <Box>
+        <VStack spacing={4} align="stretch">
+          <HStack justifyContent="space-between">
+            <Input
+              placeholder="Ara..."
+              onChange={(e) => setSearchText(e.target.value)}
+              width="300px"
+            />
+            <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
+              Kişi Ekle
+            </Button>
+          </HStack>
 
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th>Ad</Th>
-              <Th>E-posta</Th>
-              <Th>Telefon</Th>
-              <Th>İşlemler</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {currentContacts.map((contact) => (
-              <Tr key={contact.id}>
-                <Td>{contact.first_name} {contact.last_name}</Td>
-                <Td>{contact.email}</Td>
-                <Td>{contact.phone}</Td>
-                <Td>
-                  <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(contact)}>
-                    Düzenle
-                  </Button>
-                  <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDeleteClick(contact.id)}>
-                    Sil
-                  </Button>
-                </Td>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Ad</Th>
+                <Th>E-posta</Th>
+                <Th>Telefon</Th>
+                <Th>İşlemler</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {currentContacts.map((contact) => (
+                <Tr key={contact.id}>
+                  <Td>{contact.first_name} {contact.last_name}</Td>
+                  <Td>{contact.email}</Td>
+                  <Td>{contact.phone}</Td>
+                  <Td>
+                    <Button leftIcon={<EditIcon />} mr={2} onClick={() => handleEdit(contact)}>
+                      Düzenle
+                    </Button>
+                    <Button leftIcon={<DeleteIcon />} colorScheme="red" onClick={() => handleDeleteClick(contact.id)}>
+                      Sil
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
 
-        {/* Pagination */}
-        <HStack justifyContent="center" mt={4}>
-          <Button
-            onClick={() => paginate(currentPage - 1)}
-            isDisabled={currentPage === 1}
-            leftIcon={<ChevronLeftIcon />}
-          >
-            Önceki
-          </Button>
-          <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
-          <Button
-            onClick={() => paginate(currentPage + 1)}
-            isDisabled={currentPage === totalPages}
-            rightIcon={<ChevronRightIcon />}
-          >
-            Sonraki
-          </Button>
-        </HStack>
-      </VStack>
+          {/* Pagination */}
+          <HStack justifyContent="center" mt={4}>
+            <Button
+              onClick={() => paginate(currentPage - 1)}
+              isDisabled={currentPage === 1}
+              leftIcon={<ChevronLeftIcon />}
+            >
+              Önceki
+            </Button>
+            <Text>{`Sayfa ${currentPage} / ${totalPages}`}</Text>
+            <Button
+              onClick={() => paginate(currentPage + 1)}
+              isDisabled={currentPage === totalPages}
+              rightIcon={<ChevronRightIcon />}
+            >
+              Sonraki
+            </Button>
+          </HStack>
+        </VStack>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <form onSubmit={handleSubmit}>
-            <ModalHeader>{editingContact ? 'Kişiyi Düzenle' : 'Yeni Kişi Ekle'}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <VStack spacing={4}>
-                <FormControl isRequired>
-                  <FormLabel>Ad</FormLabel>
-                  <Input name="name" defaultValue={editingContact?.first_name} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>Soyad</FormLabel>
-                  <Input name="surname" defaultValue={editingContact?.last_name} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>E-posta</FormLabel>
-                  <Input name="email" type="email" defaultValue={editingContact?.email} />
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>Telefon</FormLabel>
-                  <Input name="phone" defaultValue={editingContact?.phone} />
-                </FormControl>
-              </VStack>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} type="submit">
-                Kaydet
-              </Button>
-              <Button onClick={onClose}>İptal</Button>
-            </ModalFooter>
-          </form>
-        </ModalContent>
-      </Modal>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <form onSubmit={handleSubmit}>
+              <ModalHeader>{editingContact ? 'Kişiyi Düzenle' : 'Yeni Kişi Ekle'}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <VStack spacing={4}>
+                  <FormControl isRequired>
+                    <FormLabel>Ad</FormLabel>
+                    <Input name="name" defaultValue={editingContact?.first_name} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Soyad</FormLabel>
+                    <Input name="surname" defaultValue={editingContact?.last_name} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>E-posta</FormLabel>
+                    <Input name="email" type="email" defaultValue={editingContact?.email} />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel>Telefon</FormLabel>
+                    <Input name="phone" defaultValue={editingContact?.phone} />
+                  </FormControl>
+                </VStack>
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="blue" mr={3} type="submit">
+                  Kaydet
+                </Button>
+                <Button onClick={onClose}>İptal</Button>
+              </ModalFooter>
+            </form>
+          </ModalContent>
+        </Modal>
 
-      <AlertDialog
-        isOpen={isAlertOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onAlertClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Kişiyi Sil
-            </AlertDialogHeader>
+        <AlertDialog
+          isOpen={isAlertOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onAlertClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Kişiyi Sil
+              </AlertDialogHeader>
 
-            <AlertDialogBody>
-              Bu işlem geri alınamaz. Kişiyi sildiğinizde, bu kişiyle ilişkili tüm anlaşmalar ve biletler de silinecektir. Devam etmek istiyor musunuz?
-            </AlertDialogBody>
+              <AlertDialogBody>
+                Bu işlem geri alınamaz. Kişiyi sildiğinizde, bu kişiyle ilişkili tüm anlaşmalar ve biletler de silinecektir. Devam etmek istiyor musunuz?
+              </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onAlertClose}>
-                İptal
-              </Button>
-              <Button colorScheme="red" onClick={handleDeleteConfirm} ml={3}>
-                Sil
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </Box>
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onAlertClose}>
+                  İptal
+                </Button>
+                <Button colorScheme="red" onClick={handleDeleteConfirm} ml={3}>
+                  Sil
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      </Box>
+    </>
   );
 }
