@@ -134,7 +134,7 @@ export default function Deal() {
         await fetchDeals();
 
         toast({
-          title: 'Deal silindi',
+          title: 'Anlaşma silindi',
           status: 'success',
           duration: 2000,
           isClosable: true,
@@ -182,13 +182,13 @@ export default function Deal() {
         credentials: 'include',
       });
 
-      if (!res.ok) throw new Error(editingDeal ? 'Deal update failed' : 'Deal creation failed');
+      if (!res.ok) throw new Error(editingDeal ? 'Anlaşma bilgileri guncellenemedi' : 'Yeni anlaşma eklenemedi');
 
       // Deals'i yeniden çek
       await fetchDeals();
 
       toast({
-        title: editingDeal ? 'Deal güncellendi' : 'Yeni deal eklendi',
+        title: editingDeal ? 'Anlaşma güncellendi' : 'Yeni anlaşma eklendi',
         status: 'success',
         duration: 2000,
         isClosable: true,
@@ -209,7 +209,7 @@ export default function Deal() {
 
   const exportToPDF = () => {
     const doc = new jsPDF();
-    const tableColumn = ["Başlık", "Miktar", "Durum", "İlgili Kişi"];
+    const tableColumn = ["Baslik", "Miktar", "Durum", "Ilgili Kisi"];
     const tableRows: any[][] = [];
 
     filteredDeals.forEach(deal => {
@@ -259,7 +259,7 @@ export default function Deal() {
         <HStack justifyContent="space-between" mb={4}>
           <HStack>
             <Button w="xs" leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
-              Yeni Deal Ekle
+              Yeni Anlaşma Ekle
             </Button>
             <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
               <option value="All">Tüm Durumlar</option>
@@ -347,7 +347,7 @@ export default function Deal() {
                     <Input name="title" defaultValue={editingDeal?.title} />
                   </FormControl>
                   <FormControl isRequired>
-                    <FormLabel>Miktar</FormLabel>
+                    <FormLabel>Miktar ₺</FormLabel>
                     <NumberInput min={0} defaultValue={editingDeal?.amount || 0}>
                       <NumberInputField name="amount" />
                       <NumberInputStepper>
@@ -392,11 +392,11 @@ export default function Deal() {
           <AlertDialogOverlay>
             <AlertDialogContent>
               <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                Deal'i Sil
+                Anlaşmayı Sil
               </AlertDialogHeader>
 
               <AlertDialogBody>
-                Bu işlem geri alınamaz. Bu deal'i silmek istediğinizden emin misiniz?
+                Bu işlem geri alınamaz. Bu anlaşmayı silmek istediğinizden emin misiniz?
               </AlertDialogBody>
 
               <AlertDialogFooter>

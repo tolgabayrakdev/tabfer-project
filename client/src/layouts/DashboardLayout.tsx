@@ -59,10 +59,10 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
         Kişiler
       </NavItem>
       <NavItem icon={<QuestionIcon />} to="/dashboard/deals" onClick={onNavigate}>
-        Deals
+        Anlaşmalar
       </NavItem>
       <NavItem icon={<FaTicketAlt />} to="/dashboard/tickets" onClick={onNavigate}>
-        Tickets
+        Destek Biletleri
       </NavItem>
     </VStack>
   )

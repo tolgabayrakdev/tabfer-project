@@ -213,7 +213,7 @@ export default function Ticket() {
       <Box>
         <HStack justifyContent="space-between" mb={4}>
           <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={handleAdd}>
-            Yeni Ticket Ekle
+            Yeni Bilet Ekle
           </Button>
           <Select
             w="200px"
@@ -283,7 +283,7 @@ export default function Ticket() {
           <ModalOverlay />
           <ModalContent bg={bgColor}>
             <form onSubmit={handleSubmit}>
-              <ModalHeader color={textColor}>{editingTicket ? 'Ticket Düzenle' : 'Yeni Ticket Ekle'}</ModalHeader>
+              <ModalHeader color={textColor}>{editingTicket ? 'Bilet Düzenle' : 'Yeni Bilet Ekle'}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <VStack spacing={4}>
@@ -330,11 +330,11 @@ export default function Ticket() {
           <AlertDialogOverlay>
             <AlertDialogContent>
               <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                Ticket'ı Sil
+                Bileti Sil
               </AlertDialogHeader>
 
               <AlertDialogBody>
-                Bu işlem geri alınamaz. Bu ticket'ı silmek istediğinizden emin misiniz?
+                Bu işlem geri alınamaz. Bu bileti silmek istediğinizden emin misiniz?
               </AlertDialogBody>
 
               <AlertDialogFooter>
