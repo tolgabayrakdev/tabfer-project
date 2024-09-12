@@ -17,3 +17,6 @@ Bu dashboard uygulaması, müşteri ilişkilerini ve iş süreçlerini yönetmek
 - İsim, e-posta adresi, telefon numarası, şirket gibi bilgiler burada saklanır. Ayrıca, her bir kişiyle ilgili notlar, e-postalar veya ilgili anlaşmalar da ilişkilendirilebilir.
 
 
+
+- Youtube Video
+[YouTube Video Linki](https://youtu.be/oXx5XxfPZYI?si=ub_E0frsrZ8VkJJ3)
