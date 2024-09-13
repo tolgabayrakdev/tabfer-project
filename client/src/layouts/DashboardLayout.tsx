@@ -57,9 +57,6 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
         Profil
       </NavItem>
 
-      <NavItem icon={<FaTicketAlt />} to="/dashboard/tickets" onClick={onNavigate}>
-        Destek Biletleri
-      </NavItem>
     </VStack>
   )
 }
