@@ -19,11 +19,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon } from '@chakra-ui/icons'
-
 import LoadingSpinner from '../components/Loading'
-import AuthWrapper from '../wrappers/AuthWrapper'
-import { FaTicketAlt } from 'react-icons/fa';
-
 
 // NavItem bileşeni
 const NavItem = ({ icon, children, to, onClick }: { icon: React.ReactNode, children: React.ReactNode, to: string, onClick: (to: string) => void }) => {
@@ -56,12 +52,11 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
       <NavItem icon={<TriangleUpIcon />} to="/dashboard/profile" onClick={onNavigate}>
         Profil
       </NavItem>
-
     </VStack>
   )
 }
 
-function DashboardLayout() {
+export default function DashboardLayout() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate()
@@ -89,7 +84,7 @@ function DashboardLayout() {
           credentials: "include"
         });
         if (res.status === 200) {
-          navigate('/signin') 
+          navigate('/signin') // Kullanıcıyı login sayfasına yönlendir
           setIsLogoutLoading(false)
         }
       } catch (error) {
@@ -103,7 +98,7 @@ function DashboardLayout() {
   const borderColor = useColorModeValue('gray.200', 'gray.700')
   const headerBg = useColorModeValue('white', 'gray.800')
   const footerBg = useColorModeValue('gray.100', 'gray.700')
-  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') 
+  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') // Yeni eklenen satır
 
   return (
     <Flex minH="100vh">
@@ -200,5 +195,3 @@ function DashboardLayout() {
     </Flex>
   )
 }
-
-export default AuthWrapper(DashboardLayout);
