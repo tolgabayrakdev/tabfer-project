@@ -18,7 +18,8 @@ import {
   Spacer,
   useColorModeValue
 } from '@chakra-ui/react'
-import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon, QuestionIcon, PhoneIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, ViewIcon, SunIcon, MoonIcon, TriangleUpIcon } from '@chakra-ui/icons'
+
 import LoadingSpinner from '../components/Loading'
 import AuthWrapper from '../wrappers/AuthWrapper'
 import { FaTicketAlt } from 'react-icons/fa';
@@ -55,12 +56,7 @@ const Sidebar = ({ onNavigate }: { onNavigate: (to: string) => void }) => {
       <NavItem icon={<TriangleUpIcon />} to="/dashboard/profile" onClick={onNavigate}>
         Profil
       </NavItem>
-      <NavItem icon={<PhoneIcon />} to="/dashboard/contacts" onClick={onNavigate}>
-        Kişiler
-      </NavItem>
-      <NavItem icon={<QuestionIcon />} to="/dashboard/deals" onClick={onNavigate}>
-        Anlaşmalar
-      </NavItem>
+
       <NavItem icon={<FaTicketAlt />} to="/dashboard/tickets" onClick={onNavigate}>
         Destek Biletleri
       </NavItem>
@@ -110,7 +106,7 @@ function DashboardLayout() {
   const borderColor = useColorModeValue('gray.200', 'gray.700')
   const headerBg = useColorModeValue('white', 'gray.800')
   const footerBg = useColorModeValue('gray.100', 'gray.700')
-  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') // Yeni eklenen satır
+  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') 
 
   return (
     <Flex minH="100vh">
