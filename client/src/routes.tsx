@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Contact from './pages/dashboard/Contact';
 
 const HomePage = lazy(() => import('./pages/Home'));
 const SignInPage = lazy(() => import('./pages/SignIn'));
@@ -8,9 +9,10 @@ const NotFoundPage = lazy(() => import('./pages/error/NotFound'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
 const DashboardIndexPage = lazy(() => import('./pages/dashboard/Index'));
-const DashboardSettingsPage = lazy(() => import('./pages/dashboard/Settings'));
 const DashboardProfilePage = lazy(() => import('./pages/dashboard/Profile'));
-
+const DashboardContactPage = lazy(() => import('./pages/dashboard/Contact'));
+const DashboardDealPage = lazy(() => import('./pages/dashboard/Deal'));
+const DashboardTicketPage = lazy(() => import('./pages/dashboard/Ticket'));
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -37,8 +39,11 @@ const routes = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             { path: "", element: <DashboardIndexPage />, index: true },
-            { path: "settings", element: <DashboardSettingsPage /> },
-            { path: "profile", element: <DashboardProfilePage /> }
+            { path: "profile", element: <DashboardProfilePage /> },
+            { path: "contacts", element: <DashboardContactPage /> },
+            { path: "contacts", element: <Contact /> }, 
+            { path: "deals", element: <DashboardDealPage /> },
+            { path: "tickets", element: <DashboardTicketPage /> },
         ]
     }
 ]);
