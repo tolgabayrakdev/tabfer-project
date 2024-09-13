@@ -96,7 +96,7 @@ function DashboardLayout() {
           credentials: "include"
         });
         if (res.status === 200) {
-          navigate('/signin') // Kullanıcıyı login sayfasına yönlendir
+          navigate('/signin') 
           setIsLogoutLoading(false)
         }
       } catch (error) {
