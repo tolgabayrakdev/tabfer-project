@@ -98,7 +98,7 @@ export default function DashboardLayout() {
   const borderColor = useColorModeValue('gray.200', 'gray.700')
   const headerBg = useColorModeValue('white', 'gray.800')
   const footerBg = useColorModeValue('gray.100', 'gray.700')
-  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') // Yeni eklenen satır
+  const loadingBg = useColorModeValue('rgba(255,255,255,0.7)', 'rgba(26,32,44,0.7)') 
 
   return (
     <Flex minH="100vh">
